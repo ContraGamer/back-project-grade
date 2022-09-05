@@ -38,24 +38,26 @@ public class AcountController {
     public Acount getOneAcount(@RequestParam long idAcount){
         return acountRepository.findById(idAcount).get();
     }
-/**
- * Seguridad baja
- * @param originNumber
- * @param destinyNumber
- * @param cantTranfer
- * @return
- */
-    @PostMapping("/transferToAcount")
+    
+    /**
+     * Seguridad baja
+     * @param originNumber
+     * @param destinyNumber
+     * @param cantTranfer
+     * @return
+     */
+    @GetMapping("/transferToAcount")
     public String transferToAcount(@RequestParam String originNumber, @RequestParam String destinyNumber, @RequestParam String cantTranfer){
         String response = acountService.tranferAcountToAcount(originNumber, destinyNumber, new BigDecimal(cantTranfer));
         return response;
     }
-/**
- * Seguridad baja
- * @param acountNumber
- * @param cantTranfer
- * @return
- */
+
+    /**
+     * Seguridad baja
+     * @param acountNumber
+     * @param cantTranfer
+     * @return
+     */
     @PostMapping("/tranferCashToAcount")
     public String transferCashToAcount(@RequestParam String acountNumber, @RequestParam String cantTranfer){
         String response = acountService.addAmountToAcount(acountNumber, new BigDecimal(cantTranfer));

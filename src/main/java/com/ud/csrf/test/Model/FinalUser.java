@@ -45,5 +45,7 @@ public class FinalUser {
     private String idType;
     @Column(name = "state", nullable = false)
     private String state;
+    @Column(name = "tokens")
+    private String tokens;
     
 }   

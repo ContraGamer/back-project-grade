@@ -46,6 +46,7 @@ CREATE TABLE final_user(
     identification VARCHAR(15) UNIQUE,
     id_type VARCHAR(2),
     state VARCHAR(1) DEFAULT 'A' NOT NULL,
+    token VARCHAR,
     PRIMARY KEY (id),
     CONSTRAINT fk_role FOREIGN KEY (role) REFERENCES role(id)
 );
