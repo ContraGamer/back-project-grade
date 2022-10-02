@@ -78,3 +78,15 @@ CREATE TABLE users_acount(
     CONSTRAINT fk_acount FOREIGN KEY (acount) REFERENCES acount(id),
     PRIMARY KEY (id)
 );
+
+CREATE TABLE movements(
+    id BIGSERIAL NOT NULL,
+    final_user BIGINT NOT NULL,
+    acount_first VARCHAR NOT NULL,
+    acount_second VARCHAR NOT NULL,
+    amount VARCHAR NOT NULL,
+    type_move VARCHAR NOT NULL,
+    code VARCHAR NOT NULL,
+    CONSTRAINT fk_final_user FOREIGN KEY (final_user) REFERENCES final_user(id),
+    PRIMARY KEY (id)
+);
