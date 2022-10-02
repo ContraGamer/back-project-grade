@@ -13,25 +13,20 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "movements", schema = "public")
-public class Movements {
+@Table(name = "users_acount", schema = "public")
+public class UserAcount {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "id", unique = true, nullable = false)
     private long id;
     @ManyToOne
     @JoinColumn(name = "final_user", nullable = false)
     private FinalUser finalUser;
-    @Column(name = "acount_first", nullable = false)
-    private String acountFirst;
-    @Column(name = "acount_second", nullable = false)
-    private String acountSecond;
-    @Column(name = "amount", nullable = false)
-    private String amount;
-    @Column(name = "type_move", nullable = false)
-    private String typeMove;
-    @Column(name = "code", nullable = false)
-    private String code;
-    
+    @ManyToOne
+    @JoinColumn(name = "acount", nullable = false)
+    private FinalUser acount;
+    @Column(name = "state", nullable = false)
+    private String state;
+
 }
