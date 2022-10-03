@@ -66,8 +66,8 @@ INSERT INTO type_acount(name) VALUES('DÉBITO');
 INSERT INTO type_acount(name) VALUES('CRÉDITO');
 
 -- Cuentas iniciales
-INSERT INTO acount(name,amount,type_acount) VALUES('Cuenta nómina','0',1);
-INSERT INTO acount(name,amount,type_acount) VALUES('Tarjeta crédito','0',2);
+INSERT INTO acount(name,amount,number,type_acount) VALUES('Cuenta nómina','1234567812345678','0',1);
+INSERT INTO acount(name,amount,number,type_acount) VALUES('Tarjeta crédito','1234567812345678','0',2);
 
 -- Asignación de cuenta a clientes
 INSERT INTO users_acount(final_user,acount) VALUES(3,1);

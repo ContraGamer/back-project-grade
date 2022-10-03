@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ud.csrf.test.DTO.LogOutResponseDTO;
+import com.ud.csrf.test.DTO.LogUpRequestDTO;
+import com.ud.csrf.test.DTO.LogUpResponseDTO;
 import com.ud.csrf.test.DTO.LoginDTO;
 import com.ud.csrf.test.Model.FinalUser;
 import com.ud.csrf.test.Services.FinalUserService;
@@ -32,6 +34,11 @@ public class FinalUserController {
     public LogOutResponseDTO logOut(final HttpServletRequest httpServletRequest, final HttpServletResponse httpServletResponse){
         System.out.println(httpServletRequest.getHeader("Authorization"));
         return finalUserService.logOut(httpServletRequest, httpServletResponse);
+    }
+
+    @PostMapping("/logup")
+    public  LogUpResponseDTO logUp(@RequestBody LogUpRequestDTO logup){
+        return finalUserService.logUp(logup);
     }
     
 }
