@@ -5,7 +5,10 @@ import java.math.BigDecimal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ud.csrf.test.DTO.CreateAcountRequestDTO;
+import com.ud.csrf.test.DTO.CreateAcountResponseDTO;
 import com.ud.csrf.test.Model.Acount;
+import com.ud.csrf.test.Model.FinalUser;
 import com.ud.csrf.test.Repository.AcountRepository;
 
 @Service
@@ -13,6 +16,12 @@ public class AcountService {
     
     @Autowired
     AcountRepository acountRepository;
+
+    @Autowired
+    AdditionalsService additionalsService;
+
+    @Autowired
+    UserAcountService userAcountService;
 
     /**
      * Tranferir un monto de una cuenta origen a una cuenta destino.
@@ -52,5 +61,17 @@ public class AcountService {
         acount.setAmount(amount+"");
         acountRepository.save(acount);
         return "Recarga de cuenta existosa";
+    }
+
+    public CreateAcountResponseDTO createAcount(CreateAcountRequestDTO request){
+        Acount newAcount =  new Acount();
+        newAcount.setAmount("0");
+        newAcount.setName(request.getName());
+        newAcount.setNumber("");
+        newAcount.setTypeAcount(request.getTypeAcount());
+        acountRepository.save(newAcount);
+        FinalUser finalUser = additionalsService.getUserToToken("secret", request.getToken());
+        userAcountService.createAcountToUser(finalUser, newAcount);
+        return new CreateAcountResponseDTO("Se ha creado su cuenta de tipo " + request.getTypeAcount().getName(), "Recuerde personalizar su cuenta dentro de las opciones de la página.");
     }
 }
