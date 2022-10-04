@@ -56,7 +56,11 @@ public class FinalUserService {
     public LogOutResponseDTO logOut(final HttpServletRequest httpServletRequest,
             final HttpServletResponse httpServletResponse) {
         LogOutResponseDTO response = new LogOutResponseDTO();
-        if (additionalsService.verifierJWT("secret", httpServletRequest.getHeader("authorization").split(" ")[1])) {
+        String token = httpServletRequest.getHeader("authorization").split(" ")[1];
+        if (additionalsService.verifierJWT("secret", token)) {
+            FinalUser finalUser = additionalsService.getUserToToken("secret", token);
+            finalUser.setTokens(finalUser.getTokens().replace(token.trim(), ""));
+            finalUserRepository.save(finalUser);
             response.setTitle("Usuario ha cerrado sesión correctamente.");
             response.setDescription("");
         } else {

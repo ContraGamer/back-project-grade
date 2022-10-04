@@ -48,27 +48,19 @@ public class AdditionalsService {
         JWTVerifier jwtVerifier = JWT.require(algorithm).build();
         DecodedJWT decodedJWT = jwtVerifier.verify(token);
         Date dateToken = decodedJWT.getExpiresAt();
-        System.out.println(dateToken);
         if (new Date().before(dateToken)) {
             String idType = decodedJWT.getSubject().substring(0, 2);
             String id = decodedJWT.getSubject().substring(2, decodedJWT.getSubject().length());
-            System.out.println("Tipo: " + idType + " - Id: " + id);
             FinalUser finalUser = finalUserRepository.findByIdTypeAndIdentification(idType, id).get();
             String tokenUser = finalUser.getTokens();
             if (finalUser.getTokens() != null) {
                 if (tokenUser.contains(",")) {
                     for (String t : tokenUser.split(",")) {
                         if (t.trim().equals(token.trim())) {
-                            finalUser.setTokens(finalUser.getTokens().replace(token.trim(), ""));
-                            finalUserRepository.save(finalUser);
                             return true;
                         }
                     }
                 } else {
-                    if (tokenUser == token) {
-                        finalUser.setTokens(finalUser.getTokens().replace(token.trim(), ""));
-                        finalUserRepository.save(finalUser);
-                    }
                     return tokenUser == token;
                 }
             } else {
@@ -76,9 +68,23 @@ public class AdditionalsService {
             }
         } else {
             // Exception por expiración de tiempo.
+            new Exception("Ha caducado la sesión del usuario.");
         }
         return false;
 
+    }
+
+    /**
+     * Obtener usuario por token.
+     */
+    public FinalUser getUserToToken(String secret, String token){
+        Algorithm algorithm = Algorithm.HMAC256(secret.getBytes());
+        JWTVerifier jwtVerifier = JWT.require(algorithm).build();
+        DecodedJWT decodedJWT = jwtVerifier.verify(token);
+        String idType = decodedJWT.getSubject().substring(0, 2);
+        String id = decodedJWT.getSubject().substring(2, decodedJWT.getSubject().length());
+        FinalUser finalUser = finalUserRepository.findByIdTypeAndIdentification(idType, id).get();
+        return finalUser;
     }
     
 }

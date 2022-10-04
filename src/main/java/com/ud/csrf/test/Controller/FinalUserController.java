@@ -36,7 +36,6 @@ public class FinalUserController {
 
     @PostMapping("/logout")
     public LogOutResponseDTO logOut(final HttpServletRequest httpServletRequest, final HttpServletResponse httpServletResponse){
-        System.out.println(httpServletRequest.getHeader("Authorization"));
         return finalUserService.logOut(httpServletRequest, httpServletResponse);
     }
 
