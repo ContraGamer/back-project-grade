@@ -14,6 +14,7 @@ import com.ud.csrf.test.DTO.LogUpRequestDTO;
 import com.ud.csrf.test.DTO.LogUpResponseDTO;
 import com.ud.csrf.test.DTO.LoginDTO;
 import com.ud.csrf.test.Model.FinalUser;
+import com.ud.csrf.test.Services.AdditionalsService;
 import com.ud.csrf.test.Services.FinalUserService;
 
 @RestController
@@ -21,12 +22,15 @@ import com.ud.csrf.test.Services.FinalUserService;
 public class FinalUserController {
 
     @Autowired
-    FinalUserService finalUserService;
+    private FinalUserService finalUserService;
+
+    @Autowired
+    private AdditionalsService additionalsService;
 
     @PostMapping("/login")
     public FinalUser login(final HttpServletRequest httpServletRequest, final HttpServletResponse httpServletResponse, @RequestBody LoginDTO login) throws Exception{
         FinalUser finalUser = finalUserService.loginService(login);
-        httpServletResponse.addHeader("Authorization", "Bearer " + finalUserService.generateJWT("secret", login.getIdType()+login.getIdentification(),finalUser));
+        httpServletResponse.addHeader("Authorization", "Bearer " + additionalsService.generateJWT("secret", login.getIdType()+login.getIdentification(),finalUser));
         return finalUser;
     }
 
