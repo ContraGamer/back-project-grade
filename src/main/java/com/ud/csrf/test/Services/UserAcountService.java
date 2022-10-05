@@ -16,6 +16,12 @@ public class UserAcountService {
     @Autowired
     UserAcountRepository userAcountRepository;
 
+    /**
+     * Asigna la cuenta creada a un usuario.
+     * @param user
+     * @param acount
+     * @return
+     */
     public boolean createAcountToUser(FinalUser user, Acount acount) {
         try {
             UserAcount userAcount = new UserAcount();

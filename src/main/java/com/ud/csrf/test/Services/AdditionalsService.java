@@ -86,5 +86,17 @@ public class AdditionalsService {
         FinalUser finalUser = finalUserRepository.findByIdTypeAndIdentification(idType, id).get();
         return finalUser;
     }
+
+    public String generateRandomNumber(int cantidad){
+        int min = 0;
+        int max = 9;
+        String response = "";
+        for(int i = 0; i<cantidad; i++){
+            int random_int = (int)Math.floor(Math.random()*(max-min+1)+min);
+            response = response + random_int;
+        }
+        System.out.println("Numero generado: " + response + "\nLogitud de la cadena: " + response.length());
+        return response;
+    }
     
 }

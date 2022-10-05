@@ -63,11 +63,18 @@ public class AcountService {
         return "Recarga de cuenta existosa";
     }
 
+    /**
+     * Crear una cuenta.
+     * @param request
+     * @return
+     */
     public CreateAcountResponseDTO createAcount(CreateAcountRequestDTO request){
         Acount newAcount =  new Acount();
         newAcount.setAmount("0");
-        newAcount.setName(request.getName());
-        newAcount.setNumber("");
+        String name = request.getName() == null || request.getName().trim() == "" ? request.getTypeAcount().getName() : request.getName();
+        newAcount.setName(name);
+        int cantidad = request.getTypeAcount().getName().equals("DÉBITO") ? 16 : 12 ;  
+        newAcount.setNumber(additionalsService.generateRandomNumber(cantidad));
         newAcount.setTypeAcount(request.getTypeAcount());
         acountRepository.save(newAcount);
         FinalUser finalUser = additionalsService.getUserToToken("secret", request.getToken());

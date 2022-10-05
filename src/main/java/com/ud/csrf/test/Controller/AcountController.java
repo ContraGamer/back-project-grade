@@ -3,9 +3,12 @@ package com.ud.csrf.test.Controller;
 import java.math.BigDecimal;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,8 +17,8 @@ import com.ud.csrf.test.DTO.CreateAcountRequestDTO;
 import com.ud.csrf.test.DTO.CreateAcountResponseDTO;
 import com.ud.csrf.test.Model.Acount;
 import com.ud.csrf.test.Repository.AcountRepository;
-import com.ud.csrf.test.Repository.UserAcountRepository;
 import com.ud.csrf.test.Services.AcountService;
+import com.ud.csrf.test.Services.AdditionalsService;
 
 @RestController
 @RequestMapping("/acount")
@@ -26,6 +29,9 @@ public class AcountController {
 
     @Autowired
     private AcountService acountService;
+
+    @Autowired
+    private AdditionalsService additionalsService;
 
     /**
      * Seguridad extremadamente baja y método de alta criticidad.
@@ -82,7 +88,11 @@ public class AcountController {
      * @return
      */
     @PostMapping("/createAcount")
-    public CreateAcountResponseDTO createAcount(CreateAcountRequestDTO request){
+    public CreateAcountResponseDTO createAcount(final HttpServletRequest httpServletRequest, @RequestBody CreateAcountRequestDTO request){
+        String token = httpServletRequest.getHeader("authorization").split(" ")[1];
+        if(additionalsService.verifierJWT("secret", token)){
+            request.setToken(httpServletRequest.getHeader("authorization").split(" ")[1]);
+        }
         return acountService.createAcount(request);
     }
 
