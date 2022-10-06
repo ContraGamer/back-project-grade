@@ -34,7 +34,6 @@ public class UserAcountService {
             e.printStackTrace();
             return false;
         }
-
     }
 
 }
