@@ -3,8 +3,6 @@ package com.ud.csrf.test.Services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ud.csrf.test.DTO.CreateAcountRequestDTO;
-import com.ud.csrf.test.DTO.CreateAcountResponseDTO;
 import com.ud.csrf.test.Model.Acount;
 import com.ud.csrf.test.Model.FinalUser;
 import com.ud.csrf.test.Model.UserAcount;
