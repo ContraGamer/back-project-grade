@@ -7,5 +7,5 @@ import com.ud.csrf.test.Model.UserAcount;
 
 @Repository
 public interface UserAcountRepository extends JpaRepository<UserAcount, Long>{
-    
+
 }
