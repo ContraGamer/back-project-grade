@@ -1,5 +1,5 @@
 -- Ultima edición por Alexander Gonzalez -- 10-08-2022
-
+CREATE DATABASE csrf_test;
 
 -- Permisos iniciales
 INSERT INTO permit(state,name,type,icon,parent,url) VALUES('A', 'Administración','group', 'apps',0,'');-- 1
@@ -72,22 +72,3 @@ INSERT INTO acount(name,amount,number,type_acount) VALUES('Tarjeta crédito','12
 -- Asignación de cuenta a clientes
 INSERT INTO users_acount(final_user,acount) VALUES(3,1);
 INSERT INTO users_acount(final_user,acount) VALUES(3,2);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
