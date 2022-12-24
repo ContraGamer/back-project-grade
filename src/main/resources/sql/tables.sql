@@ -1,3 +1,5 @@
+CREATE DATABASE csrf_test;
+
 CREATE TABLE parameter (
     id BIGSERIAL NOT NULL,
     key VARCHAR(100) NOT NULL,

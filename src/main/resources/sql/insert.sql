@@ -1,5 +1,4 @@
 -- Ultima edición por Alexander Gonzalez -- 10-08-2022
-CREATE DATABASE csrf_test;
 
 -- Permisos iniciales
 INSERT INTO permit(state,name,type,icon,parent,url) VALUES('A', 'Administración','group', 'apps',0,'');-- 1
