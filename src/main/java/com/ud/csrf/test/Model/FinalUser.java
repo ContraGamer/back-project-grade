@@ -30,6 +30,7 @@ public class FinalUser {
     private String authType;
     @Column(name = "email", unique = true, nullable = false)
     private String email;
+    @JsonIgnore
     @Column(name = "password", nullable = false)
     private String password;
     @Column(name = "cellphone", nullable = false)
