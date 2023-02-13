@@ -48,5 +48,11 @@ public class FinalUserController {
     public  LogUpResponseDTO logUp(@RequestBody LogUpRequestDTO logup){
         return finalUserService.logUp(logup);
     }
+
+    @PostMapping("/getUserToken")
+    public FinalUser getUserToken(final HttpServletRequest httpServletRequest){
+        FinalUser user = finalUserService.getUserIntoSession(httpServletRequest);
+        return user;
+    }
     
 }

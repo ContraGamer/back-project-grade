@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ud.csrf.test.DTO.FinalUserResponseDTO;
 import com.ud.csrf.test.DTO.LogOutResponseDTO;
 import com.ud.csrf.test.DTO.LogUpRequestDTO;
 import com.ud.csrf.test.DTO.LogUpResponseDTO;
@@ -95,6 +94,19 @@ public class FinalUserService {
         response.setTitle("Se ha registrado exitosamente el usuario");
         response.setSubTitle("Tener en cuenta que tu correo es: " + logUp.getEmail());
         return response;
+    }
+
+    /**
+     * Obtiene el usuario que esta en session por medio del token JWT.
+     * @param httpServletRequest
+     * @return
+     */
+    public FinalUser getUserIntoSession(final HttpServletRequest httpServletRequest){
+        String token = httpServletRequest.getHeader("authorization").split(" ")[1];
+        if(additionalsService.verifierJWT("secret", token)){
+           return additionalsService.getUserToToken("secret", token);
+        }
+        return new FinalUser();
     }
 
 }
