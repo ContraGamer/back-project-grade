@@ -20,5 +20,7 @@ public class TypeAcount {
     private long id;
     @Column(name = "name", nullable = false)
     private String name;
+    @Column(name = "icon")
+    private String icon;
 
 }
