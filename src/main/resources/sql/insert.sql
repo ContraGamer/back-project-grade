@@ -61,13 +61,17 @@ INSERT INTO final_user(name,auth_type,email,password,cellphone,role,creation_dat
 
 
 -- Tipos de cuenta
-INSERT INTO type_acount(name) VALUES('DÉBITO');
-INSERT INTO type_acount(name) VALUES('CRÉDITO');
+INSERT INTO type_acount(name, state, icon) VALUES('DÉBITO','A', 'https://cdn-icons-png.flaticon.com/512/1611/1611179.png');
+INSERT INTO type_acount(name, state, icon) VALUES('CRÉDITO','A', 'https://cdn-icons-png.flaticon.com/512/4021/4021708.png');
 
 -- Cuentas iniciales
 INSERT INTO acount(name,amount,number,type_acount) VALUES('Cuenta nómina','1234567812345678','0',1);
 INSERT INTO acount(name,amount,number,type_acount) VALUES('Tarjeta crédito','1234567812345678','0',2);
+INSERT INTO acount(name,amount,number,type_acount) VALUES('Cuenta nómina','1234567812345678','500000',1);
+INSERT INTO acount(name,amount,number,type_acount) VALUES('Tarjeta crédito','1234567812345678','1000000',2);
 
 -- Asignación de cuenta a clientes
 INSERT INTO users_acount(final_user,acount) VALUES(3,1);
 INSERT INTO users_acount(final_user,acount) VALUES(3,2);
+INSERT INTO users_acount(final_user,acount) VALUES(2,1);
+INSERT INTO users_acount(final_user,acount) VALUES(2,2);
