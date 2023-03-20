@@ -57,6 +57,7 @@ CREATE TABLE type_acount(
     id BIGSERIAL NOT NULL,
     name VARCHAR(100) NOT NULL,
     state VARCHAR(1) DEFAULT 'A' NOT NULL,
+    icon VARCHAR(500),
     PRIMARY KEY (id)
 );
 
