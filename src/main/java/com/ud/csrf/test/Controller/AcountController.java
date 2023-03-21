@@ -62,7 +62,7 @@ public class AcountController {
      * @param cantTranfer
      * @return
      */
-    @GetMapping("/transferToAcount")
+    @PostMapping("/transferToAcount")
     public String transferToAcount(@RequestParam String originNumber, @RequestParam String destinyNumber,
             @RequestParam String cantTranfer) {
         String response = acountService.tranferAcountToAcount(originNumber, destinyNumber, new BigDecimal(cantTranfer));
