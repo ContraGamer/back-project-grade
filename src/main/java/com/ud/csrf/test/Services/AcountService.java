@@ -10,6 +10,7 @@ import com.ud.csrf.test.DTO.CreateAcountResponseDTO;
 import com.ud.csrf.test.Model.Acount;
 import com.ud.csrf.test.Model.FinalUser;
 import com.ud.csrf.test.Repository.AcountRepository;
+import com.ud.csrf.test.Repository.UserAcountRepository;
 
 @Service
 public class AcountService {
@@ -22,6 +23,9 @@ public class AcountService {
 
     @Autowired
     UserAcountService userAcountService;
+
+    @Autowired
+    UserAcountRepository userAcountRepository;
 
     /**
      * Tranferir un monto de una cuenta origen a una cuenta destino.
