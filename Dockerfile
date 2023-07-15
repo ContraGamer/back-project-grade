@@ -1,3 +1,3 @@
 FROM openjdk:11-jdk-slim
-ADD target/testapp.jar test.jar
+COPY target/testapp.jar app.jar
 ENTRYPOINT ["java", "-jar", "/test.jar"]
