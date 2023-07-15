@@ -1,8 +1,14 @@
-FROM gradle:4.7.0-jdk8-alpine AS build
-COPY --chown=gradle:gradle . /home/gradle/src
-WORKDIR /home/gradle/src
-RUN gradle build 
+# Usar una imagen de Java como base
+FROM openjdk:11
 
-FROM openjdk:11-jdk-slim
-COPY --from=build /home/gradle/src/build/libs/*.jar app.jar
-ENTRYPOINT ["java", "-XX:+UnlockExperimentalVMOptions", "-XX:+UseCGroupMemoryLimitForHeap", "-Djava.security.egd=file:/dev/./urandom","-jar","app.jar"]
+# Establecer el directorio de trabajo dentro del contenedor
+WORKDIR /app
+
+# Copiar el archivo JAR de la aplicación a la imagen
+COPY test-0.0.1-SNAPSHOT.jar app.jar
+
+# Exponer el puerto en el que se ejecuta la aplicación (ajústalo según tus necesidades)
+EXPOSE 8080
+
+# Comando para ejecutar la aplicación cuando el contenedor se inicie
+CMD ["java", "-jar", "app.jar"]
