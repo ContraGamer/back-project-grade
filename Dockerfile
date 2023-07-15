@@ -4,6 +4,7 @@ FROM openjdk:11
 # Establecer el directorio de trabajo dentro del contenedor
 WORKDIR /app
 
+RUN ls
 # Copiar el archivo JAR de la aplicación a la imagen
 COPY test-0.0.1-SNAPSHOT.jar app.jar
 
