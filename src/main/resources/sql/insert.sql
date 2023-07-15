@@ -75,3 +75,21 @@ INSERT INTO users_acount(final_user,acount) VALUES(3,1);
 INSERT INTO users_acount(final_user,acount) VALUES(3,2);
 INSERT INTO users_acount(final_user,acount) VALUES(2,1);
 INSERT INTO users_acount(final_user,acount) VALUES(2,2);
+
+-- Asignación de parametros
+-- Colores
+INSERT INTO parameter(key, value, state, of, additional) VALUES('color-td-primary', '#daa520', 'A', 'FRONT', 'DÉBITO');
+INSERT INTO parameter(key, value, state, of, additional) VALUES('color-td-secundary', '#1B2631', 'A', 'FRONT', 'DÉBITO');
+INSERT INTO parameter(key, value, state, of, additional) VALUES('color-tc-primary', '#1B2631', 'A', 'FRONT', 'CRÉDITO');
+INSERT INTO parameter(key, value, state, of, additional) VALUES('color-tc-secundary', '#b8860b', 'A', 'FRONT', 'CRÉDITO');
+INSERT INTO parameter(key, value, state, of, additional) VALUES('color-td-primary-dark', '#b8860b', 'A', 'FRONT', 'primary-color');
+-- Security levels
+INSERT INTO parameter(key, value, state, of, additional) VALUES('level-attack-without-security', 'true', 'A', 'ALL', 'without'); 
+INSERT INTO parameter(key, value, state, of, additional) VALUES('level-attack-medium-security', 'false', 'I', 'ALL', 'medium');
+INSERT INTO parameter(key, value, state, of, additional) VALUES('level-attack-high-security', 'false', 'I', 'ALL', 'high');
+-- environment locations
+INSERT INTO parameter(key, value, state, of, additional) VALUES('local-host', 'localhost:4200', 'A', 'BACK', '');
+INSERT INTO parameter(key, value, state, of, additional) VALUES('environment-develop', '', 'I', 'BACK', '');
+INSERT INTO parameter(key, value, state, of, additional) VALUES('environment-laboratory', '', 'I', 'BACK', '');
+INSERT INTO parameter(key, value, state, of, additional) VALUES('environment-prod', '', 'I', 'BACK', '');
+-- 

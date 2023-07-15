@@ -24,5 +24,9 @@ public class Parameter {
     private String value;
     @Column(name = "state", nullable = false)
     private String state;
+    @Column(name = "of")
+    private String of;
+    @Column(name = "additional")
+    private String additional;
 
 }

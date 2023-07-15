@@ -5,6 +5,8 @@ CREATE TABLE parameter (
     key VARCHAR(100) NOT NULL,
     value VARCHAR(500) NOT NULL,
     state VARCHAR(1) NOT NULL,
+    of VARCHAR(50),
+    additional VARCHAR(500),
     PRIMARY KEY (id)
 );
 
@@ -93,3 +95,7 @@ CREATE TABLE movements(
     CONSTRAINT fk_final_user FOREIGN KEY (final_user) REFERENCES final_user(id),
     PRIMARY KEY (id)
 );
+
+
+-- ALTER TABLE parameter ADD COLUMN additional VARCHAR(500);
+-- ALTER TABLE parameter ADD COLUMN of VARCHAR(50);
