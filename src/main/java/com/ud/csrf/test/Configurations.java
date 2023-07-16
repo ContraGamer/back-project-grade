@@ -36,11 +36,12 @@ public class Configurations {
                     }
                     if(parameter.getKey() == HIGHSECURITY){
                         highSecurity(registry);
-                    }
-                }
-                registry.addMapping("/**")
+                    } else {
+                        registry.addMapping("/**")
                         .allowedOrigins("*")
                         .allowedMethods("GET", "POST", "PUT","DELETE").allowCredentials(false).allowedHeaders("*");
+                    }
+                }
             }
 
             public void ceroSecurity(CorsRegistry registry) {
