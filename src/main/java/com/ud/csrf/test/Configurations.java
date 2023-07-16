@@ -29,15 +29,15 @@ public class Configurations {
                 List<Parameter> parameterList = parameterRepository.findByOfAndState("SEGURITY", "A").get();
                 for (Parameter parameter : parameterList) {
                     System.out.println("Dato: " + parameter.getKey());
-                    if(parameter.getKey() == CEROSEGURITY){
+                    if(parameter.getKey().equals(CEROSEGURITY)){
                         System.out.println("SEGURIDAD CERO");
                         ceroSecurity(registry);
                     }
-                    else if(parameter.getKey() == MEDIUMSECURITY){
+                    else if(parameter.getKey().equals(MEDIUMSECURITY)){
                         System.out.println("SEGURIDAD MEDIA");
                         mediumSecurity(registry);
                     }
-                    else if(parameter.getKey() == HIGHSECURITY){
+                    else if(parameter.getKey().equals(HIGHSECURITY)){
                         System.out.println("SEGURIDAD ALTA");
                         highSecurity(registry);
                     } else {
