@@ -65,10 +65,10 @@ INSERT INTO type_acount(name, state, icon) VALUES('DÉBITO','A', 'https://cdn-ic
 INSERT INTO type_acount(name, state, icon) VALUES('CRÉDITO','A', 'https://cdn-icons-png.flaticon.com/512/4021/4021708.png');
 
 -- Cuentas iniciales
-INSERT INTO acount(name,amount,number,type_acount) VALUES('Cuenta nómina','1234567812345678','0',1);
-INSERT INTO acount(name,amount,number,type_acount) VALUES('Tarjeta crédito','1234567812345678','0',2);
-INSERT INTO acount(name,amount,number,type_acount) VALUES('Cuenta nómina','1234567812345678','500000',1);
-INSERT INTO acount(name,amount,number,type_acount) VALUES('Tarjeta crédito','1234567812345678','1000000',2);
+INSERT INTO acount(name,amount,number,type_acount) VALUES('Cuenta nómina','0', '1234567812345671',1);
+INSERT INTO acount(name,amount,number,type_acount) VALUES('Tarjeta crédito','0','1234567812345672',2);
+INSERT INTO acount(name,amount,number,type_acount) VALUES('Cuenta nómina','500000','1234567812345673',1);
+INSERT INTO acount(name,amount,number,type_acount) VALUES('Tarjeta crédito','1000000','1234567812345674',2);
 
 -- Asignación de cuenta a clientes
 INSERT INTO users_acount(final_user,acount) VALUES(3,1);
@@ -92,5 +92,5 @@ INSERT INTO parameter(key, value, state, of, additional) VALUES('local-host', 'l
 INSERT INTO parameter(key, value, state, of, additional) VALUES('environment-develop', '', 'I', 'BACK', '');
 INSERT INTO parameter(key, value, state, of, additional) VALUES('environment-laboratory', '', 'I', 'BACK', '');
 INSERT INTO parameter(key, value, state, of, additional) VALUES('environment-prod', '', 'I', 'BACK', '');
-INSERT INTO parameter(key, value, state, of, additional) VALUES('time-session', '100', 'A', 'BACK', '');
+INSERT INTO parameter(key, value, state, of, additional) VALUES('time-session', '100', 'A', 'BACK', 'minutes');
 -- 

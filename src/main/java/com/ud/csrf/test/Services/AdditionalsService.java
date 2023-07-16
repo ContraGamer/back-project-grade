@@ -10,13 +10,18 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.ud.csrf.test.Model.FinalUser;
+import com.ud.csrf.test.Model.Parameter;
 import com.ud.csrf.test.Repository.FinalUserRepository;
+import com.ud.csrf.test.Repository.ParameterRepository;
 
 @Service
 public class AdditionalsService {
 
     @Autowired
     private FinalUserRepository finalUserRepository;
+
+    @Autowired
+    private ParameterRepository parameterRepository;
 
     /**
      * Genera un JWT al realizar un inicio de sesion
@@ -28,8 +33,16 @@ public class AdditionalsService {
      */
     public String generateJWT(String secret, String idTypeAndId, FinalUser finalUser) {
         Algorithm algorithm = Algorithm.HMAC256(secret.getBytes());
+        int paramTimeValue = 5;
+        try {
+            Parameter paramTime = parameterRepository.findByKeyAndState("time-session", "A").get();
+            paramTimeValue = Integer.parseInt(paramTime.getValue());
+        } catch (Exception e) {
+            System.out.println("Error en variable de tiempo de sesión se deja por defecto 5 minutos. ERROR: " + e.getMessage());
+            e.printStackTrace();
+        }
         String jwt = JWT.create().withSubject(idTypeAndId)
-                .withExpiresAt(new Date(System.currentTimeMillis() + 5 * 60 * 1000)).sign(algorithm);
+                .withExpiresAt(new Date(System.currentTimeMillis() + paramTimeValue * 60 * 1000)).sign(algorithm);
         String tokenUser = finalUser.getTokens() == null ? jwt : finalUser.getTokens() + "," + jwt;
         finalUser.setTokens(tokenUser);
         finalUserRepository.save(finalUser);
