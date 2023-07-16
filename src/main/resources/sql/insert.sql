@@ -92,4 +92,5 @@ INSERT INTO parameter(key, value, state, of, additional) VALUES('local-host', 'l
 INSERT INTO parameter(key, value, state, of, additional) VALUES('environment-develop', '', 'I', 'BACK', '');
 INSERT INTO parameter(key, value, state, of, additional) VALUES('environment-laboratory', '', 'I', 'BACK', '');
 INSERT INTO parameter(key, value, state, of, additional) VALUES('environment-prod', '', 'I', 'BACK', '');
+INSERT INTO parameter(key, value, state, of, additional) VALUES('time-session', '100', 'A', 'BACK', '');
 -- 

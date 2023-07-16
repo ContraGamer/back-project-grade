@@ -29,7 +29,7 @@ public class AdditionalsService {
     public String generateJWT(String secret, String idTypeAndId, FinalUser finalUser) {
         Algorithm algorithm = Algorithm.HMAC256(secret.getBytes());
         String jwt = JWT.create().withSubject(idTypeAndId)
-                .withExpiresAt(new Date(System.currentTimeMillis() + 10 * 60 * 1000)).sign(algorithm);
+                .withExpiresAt(new Date(System.currentTimeMillis() + 5 * 60 * 1000)).sign(algorithm);
         String tokenUser = finalUser.getTokens() == null ? jwt : finalUser.getTokens() + "," + jwt;
         finalUser.setTokens(tokenUser);
         finalUserRepository.save(finalUser);
