@@ -33,11 +33,11 @@ public class Configurations {
                         System.out.println("SEGURIDAD CERO");
                         ceroSecurity(registry);
                     }
-                    if(parameter.getKey() == MEDIUMSECURITY){
+                    else if(parameter.getKey() == MEDIUMSECURITY){
                         System.out.println("SEGURIDAD MEDIA");
                         mediumSecurity(registry);
                     }
-                    if(parameter.getKey() == HIGHSECURITY){
+                    else if(parameter.getKey() == HIGHSECURITY){
                         System.out.println("SEGURIDAD ALTA");
                         highSecurity(registry);
                     } else {
