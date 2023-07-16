@@ -66,7 +66,7 @@ public class Configurations {
             public void highSecurity(CorsRegistry registry) {
                 System.out.println("SEGURIDAD ALTA");
                 registry.addMapping("/**")
-                        .allowedMethods("GET", "POST", "PUT","DELETE").allowCredentials(false).allowedHeaders("*");
+                        .allowedMethods("GET", "POST", "PUT","DELETE").allowCredentials(true).allowedHeaders("*");
             }
         };
     }
