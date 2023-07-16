@@ -28,6 +28,7 @@ public class Configurations {
             public void addCorsMappings(CorsRegistry registry) {
                 List<Parameter> parameterList = parameterRepository.findByOfAndState("SEGURITY", "A").get();
                 for (Parameter parameter : parameterList) {
+                    System.out.println("Dato: " + parameter.getKey());
                     if(parameter.getKey() == CEROSEGURITY){
                         System.out.println("SEGURIDAD CERO");
                         ceroSecurity(registry);
