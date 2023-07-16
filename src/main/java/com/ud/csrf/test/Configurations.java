@@ -29,14 +29,18 @@ public class Configurations {
                 List<Parameter> parameterList = parameterRepository.findByOfAndState("SEGURITY", "A").get();
                 for (Parameter parameter : parameterList) {
                     if(parameter.getKey() == CEROSEGURITY){
+                        System.out.println("SEGURIDAD CERO");
                         ceroSecurity(registry);
                     }
                     if(parameter.getKey() == MEDIUMSECURITY){
+                        System.out.println("SEGURIDAD MEDIA");
                         mediumSecurity(registry);
                     }
                     if(parameter.getKey() == HIGHSECURITY){
+                        System.out.println("SEGURIDAD ALTA");
                         highSecurity(registry);
                     } else {
+                        System.out.println("SEGURIDAD POR DEFECTO");
                         registry.addMapping("/**")
                         .allowedOrigins("*")
                         .allowedMethods("GET", "POST", "PUT","DELETE").allowCredentials(false).allowedHeaders("*");
