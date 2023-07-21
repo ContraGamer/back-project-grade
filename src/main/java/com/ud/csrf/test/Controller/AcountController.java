@@ -1,6 +1,7 @@
 package com.ud.csrf.test.Controller;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +18,10 @@ import com.ud.csrf.test.DTO.CreateAcountRequestDTO;
 import com.ud.csrf.test.DTO.CreateAcountResponseDTO;
 import com.ud.csrf.test.DTO.TransferToAcountDTO;
 import com.ud.csrf.test.Model.Acount;
+import com.ud.csrf.test.Model.FinalUser;
+import com.ud.csrf.test.Model.UserAcount;
 import com.ud.csrf.test.Repository.AcountRepository;
+import com.ud.csrf.test.Repository.UserAcountRepository;
 import com.ud.csrf.test.Services.AcountService;
 import com.ud.csrf.test.Services.AdditionalsService;
 
@@ -33,6 +37,9 @@ public class AcountController {
 
     @Autowired
     private AdditionalsService additionalsService;
+
+    @Autowired
+    private UserAcountRepository userAcountRepository;
 
     /**
      * Seguridad extremadamente baja y método de alta criticidad.
@@ -127,6 +134,20 @@ public class AcountController {
             request.setToken(httpServletRequest.getHeader("authorization").split(" ")[1]);
         }
         return acountService.createAcount(request);
+    }
+
+    @PostMapping("/getAccountsWithToken")
+    public List<Acount> getAccountsWithToken(final HttpServletRequest httpServletRequest) {
+        String token = additionalsService.getToken(httpServletRequest);
+        FinalUser finalUser = new FinalUser();
+        if(token != "valueNull")
+            finalUser = additionalsService.getUserToToken("secret", token);
+        System.out.println("Data final user: " + finalUser);
+        List<Acount> listAcount = new ArrayList();
+        for (UserAcount acount : userAcountRepository.findByFinalUser(finalUser).get()) {
+            listAcount.add(acount.getAcount());
+        }
+        return listAcount;
     }
 
 }
