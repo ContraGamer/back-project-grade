@@ -17,13 +17,6 @@ public class Configurations {
     @Autowired
     ParameterRepository parameterRepository;
 
-    // CorsConfiguration corsConfiguration2;
-    
-    // @Autowired
-    // public void CorsController(CorsConfiguration corsConfiguration) {
-    //     this.corsConfiguration2 = corsConfiguration;
-    // }
-
     String CEROSEGURITY = "level-attack-without-security";
     String MEDIUMSECURITY = "level-attack-medium-security";
     String HIGHSECURITY = "level-attack-high-security";

@@ -2,6 +2,8 @@ package com.ud.csrf.test.Services;
 
 import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -110,6 +112,15 @@ public class AdditionalsService {
         }
         System.out.println("Numero generado: " + response + "\nLogitud de la cadena: " + response.length());
         return response;
+    }
+
+    public String getToken(final HttpServletRequest httpServletRequest){
+        try {
+            return httpServletRequest.getHeader("authorization").split(" ")[1];
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "valueNull";
+        }
     }
     
 }

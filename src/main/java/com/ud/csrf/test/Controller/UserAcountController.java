@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ud.csrf.test.Model.FinalUser;
 import com.ud.csrf.test.Model.UserAcount;
 import com.ud.csrf.test.Repository.UserAcountRepository;
+import com.ud.csrf.test.Services.AdditionalsService;
 
 @RestController
 @RequestMapping("/user-acount")
@@ -22,6 +23,9 @@ public class UserAcountController {
     @Autowired
     private UserAcountRepository userAcountRepository;
 
+    @Autowired
+    private AdditionalsService additionalsService;
+
     @GetMapping("/getAll")
     public List<UserAcount> getAll() {
         return userAcountRepository.findAll();
@@ -29,6 +33,16 @@ public class UserAcountController {
 
     @PostMapping("/getUserAccounts")
     public List <UserAcount> getUserAccounts(final HttpServletRequest httpServletRequest, @RequestBody FinalUser finalUser) {
+        return userAcountRepository.findByFinalUser(finalUser).get();
+    }
+
+    @PostMapping("/getUserAccounts")
+    public List<UserAcount> getUserAccounts(final HttpServletRequest httpServletRequest) {
+        String token = additionalsService.getToken(httpServletRequest);
+        FinalUser finalUser = new FinalUser();
+        if(token != "valueNull")
+            finalUser = additionalsService.getUserToToken("secret", token);
+        System.out.println("Data final user: " + finalUser);
         return userAcountRepository.findByFinalUser(finalUser).get();
     }
 
