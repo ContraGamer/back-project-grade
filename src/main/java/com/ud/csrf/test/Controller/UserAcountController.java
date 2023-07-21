@@ -36,8 +36,8 @@ public class UserAcountController {
         return userAcountRepository.findByFinalUser(finalUser).get();
     }
 
-    @PostMapping("/getUserAccounts")
-    public List<UserAcount> getUserAccounts(final HttpServletRequest httpServletRequest) {
+    @PostMapping("/getUserAccountsWithToken")
+    public List<UserAcount> getUserAccountsWithToken(final HttpServletRequest httpServletRequest) {
         String token = additionalsService.getToken(httpServletRequest);
         FinalUser finalUser = new FinalUser();
         if(token != "valueNull")
