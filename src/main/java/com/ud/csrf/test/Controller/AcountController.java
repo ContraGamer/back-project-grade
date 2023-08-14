@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ud.csrf.test.DTO.CreateAcountRequestDTO;
 import com.ud.csrf.test.DTO.CreateAcountResponseDTO;
+import com.ud.csrf.test.DTO.GenericResponseDTO;
 import com.ud.csrf.test.DTO.TransferToAcountDTO;
 import com.ud.csrf.test.Model.Acount;
 import com.ud.csrf.test.Model.FinalUser;
@@ -71,10 +72,10 @@ public class AcountController {
      * @return
      */
     @PostMapping("/transferToAcount")
-    public String transferToAcount(@RequestParam String originNumber, @RequestParam String destinyNumber,
+    public GenericResponseDTO<String> transferToAcount(@RequestParam String originNumber, @RequestParam String destinyNumber,
             @RequestParam String cantTranfer) {
         String response = acountService.tranferAcountToAcount(originNumber, destinyNumber, new BigDecimal(cantTranfer));
-        return response;
+        return additionalsService.responseController(response, 0);
     }
 
     /**
@@ -86,11 +87,11 @@ public class AcountController {
      * @return
      */
     @PostMapping("/transferToAcount2")
-    public String transferToAcount2(@RequestBody TransferToAcountDTO transferToAcount) {
+    public GenericResponseDTO<String> transferToAcount2(@RequestBody TransferToAcountDTO transferToAcount) {
         System.out.println("transferToAcount: " + transferToAcount);
         String response = acountService.tranferAcountToAcount(transferToAcount.getOriginNumber(), transferToAcount.getDestinyNumber(),
         new BigDecimal(transferToAcount.getCantTranfer()));
-        return response;
+        return additionalsService.responseController(response, 0);
     }
 
     /**
@@ -102,11 +103,11 @@ public class AcountController {
      * @return
      */
     @PostMapping("/transferToAcount3")
-    public String transferToAcount3(@RequestParam String originNumber, @RequestParam String destinyNumber, @RequestParam String cantTranfer) {
+    public GenericResponseDTO<String> transferToAcount3(@RequestParam String originNumber, @RequestParam String destinyNumber, @RequestParam String cantTranfer) {
         System.out.println("originNumber: " + originNumber + " ; destinyNumber: " + destinyNumber + " ; cantTranfer : " + cantTranfer );
         String response = acountService.tranferAcountToAcount(originNumber, destinyNumber,
         new BigDecimal(cantTranfer));
-        return response;
+        return additionalsService.responseController(response, 0);
     }
 
     /**
@@ -117,9 +118,9 @@ public class AcountController {
      * @return
      */
     @PostMapping("/tranferCashToAcount")
-    public String transferCashToAcount(@RequestParam String acountNumber, @RequestParam String cantTranfer) {
+    public GenericResponseDTO<String> transferCashToAcount(@RequestParam String acountNumber, @RequestParam String cantTranfer) {
         String response = acountService.addAmountToAcount(acountNumber, new BigDecimal(cantTranfer));
-        return response;
+        return additionalsService.responseController(response, 0);
     }
 
     /**

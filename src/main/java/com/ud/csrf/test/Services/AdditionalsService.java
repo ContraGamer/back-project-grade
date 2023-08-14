@@ -11,6 +11,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.ud.csrf.test.DTO.GenericResponseDTO;
 import com.ud.csrf.test.Model.FinalUser;
 import com.ud.csrf.test.Model.Parameter;
 import com.ud.csrf.test.Repository.FinalUserRepository;
@@ -121,6 +122,30 @@ public class AdditionalsService {
             e.printStackTrace();
             return "valueNull";
         }
+    }
+
+    public <T> GenericResponseDTO<T> responseController(T Data, int status, String msg, String subMsg){
+        GenericResponseDTO<T> response = new GenericResponseDTO<>();
+        response.setStatus(status);
+        response.setMessage(msg);
+        response.setSubMessage(subMsg);
+        response.setData(Data);
+        return response;
+    }
+
+    public <T> GenericResponseDTO<T> responseController(T Data, int status, String msg){
+        GenericResponseDTO<T> response = new GenericResponseDTO<>();
+        response.setStatus(status);
+        response.setMessage(msg);
+        response.setData(Data);
+        return response;
+    }
+
+    public <T> GenericResponseDTO<T> responseController(T Data, int status){
+        GenericResponseDTO<T> response = new GenericResponseDTO<>();
+        response.setStatus(status);
+        response.setData(Data);
+        return response;
     }
     
 }
