@@ -1,5 +1,7 @@
 package com.ud.csrf.test.Model;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,5 +35,7 @@ public class Movements {
     private String typeMove;
     @Column(name = "code", nullable = false)
     private String code;
-    
+    @Column(name = "date", nullable = false)
+    private Date date;
+
 }

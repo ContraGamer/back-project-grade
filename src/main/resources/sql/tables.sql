@@ -92,6 +92,7 @@ CREATE TABLE movements(
     amount VARCHAR NOT NULL,
     type_move VARCHAR NOT NULL,
     code VARCHAR NOT NULL,
+    date TIMESTAMP DEFAULT now() NOT NULL,
     CONSTRAINT fk_final_user FOREIGN KEY (final_user) REFERENCES final_user(id),
     PRIMARY KEY (id)
 );
@@ -99,3 +100,6 @@ CREATE TABLE movements(
 
 -- ALTER TABLE parameter ADD COLUMN additional VARCHAR(500);
 -- ALTER TABLE parameter ADD COLUMN of VARCHAR(50);
+-- ALTER TABLE movements ADD COMUMN date TIMESTAMP DEFAULT now();
+-- ALTER TABLE movements ADD COLUMN date TIMESTAMP;
+-- ALTER TABLE movements ADD COLUMN code VARCHAR(10);
