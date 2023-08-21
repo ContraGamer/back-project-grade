@@ -42,6 +42,7 @@ public class MovementController {
             dato.setValue(movement.getAmount());
             dato.setCode(movement.getCode());
             listResp.add(dato);
+            System.out.println(list.size() + "Data origin: "+ movement.getAcountFirst());
         }
         return listResp;
     }
