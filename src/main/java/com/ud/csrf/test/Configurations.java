@@ -67,7 +67,7 @@ public class Configurations {
                 System.out.println("SEGURIDAD ALTA");
                 System.out.println("");
                 registry.addMapping("/**")
-                        .allowedOrigins("http://*", "https://*", "http://localhost:4200")
+                        .allowedOrigins("http://*", "https://*", "http://localhost:4200", "https://bank-sim-project.firebaseapp.com")
                         .allowedMethods("GET", "POST", "PUT","DELETE").allowCredentials(true).allowedHeaders("*");
             }
         };
