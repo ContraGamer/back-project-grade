@@ -1,16 +1,17 @@
--- Ultima edición por Alexander Gonzalez -- 23-08-2023
+-- Ultima edición por Alexander Gonzalez -- 26-08-2023
 
 -- Permisos iniciales
 INSERT INTO permit(state,name,type,icon,parent,url) VALUES('A', 'Administración','group', 'apps',0,'');-- 1
 INSERT INTO permit(state,name,type,icon,parent,url) VALUES('A', 'Cuenta','group', 'apps',0,'');-- 2
 INSERT INTO permit(state,name,type,icon,parent,url) VALUES('A', 'Transacciones','group', 'apps',0,'');-- 3
-INSERT INTO permit(state,name,type,icon,parent,url) VALUES('A', 'Usuarios','group', 'apps',1,'');-- 4
-INSERT INTO permit(state,name,type,icon,parent,url) VALUES('A', 'Roles','group', 'apps',1,'');-- 5
-INSERT INTO permit(state,name,type,icon,parent,url) VALUES('A', 'Permisos','group', 'apps',1,'');-- 6
-INSERT INTO permit(state,name,type,icon,parent,url) VALUES('A', 'Gestionar','group', 'apps',2,'');-- 7
-INSERT INTO permit(state,name,type,icon,parent,url) VALUES('A', 'Movimientos','group', 'apps',3,'');--8
-INSERT INTO permit(state,name,type,icon,parent,url) VALUES('A', 'Trasferir','group', 'apps',3,'');-- 9
-INSERT INTO permit(state,name,type,icon,parent,url) VALUES('A', 'Recargar','group', 'apps',3,'');-- 10
+INSERT INTO permit(state,name,type,icon,parent,url) VALUES('A', 'Usuarios','item', 'apps',1,'');-- 4
+INSERT INTO permit(state,name,type,icon,parent,url) VALUES('A', 'Roles','item', 'apps',1,'');-- 5
+INSERT INTO permit(state,name,type,icon,parent,url) VALUES('A', 'Permisos','item', 'apps',1,'');-- 6
+INSERT INTO permit(state,name,type,icon,parent,url) VALUES('A', 'Gestionar','item', 'apps',2,'');-- 7
+INSERT INTO permit(state,name,type,icon,parent,url) VALUES('A', 'Movimientos','item', 'apps',3,'');--8
+INSERT INTO permit(state,name,type,icon,parent,url) VALUES('A', 'Trasferir','item', 'apps',3,'');-- 9
+INSERT INTO permit(state,name,type,icon,parent,url) VALUES('A', 'Recargar','item', 'apps',3,'');-- 10
+INSERT INTO permit(state,name,type,icon,parent,url) VALUES('A', 'Inicio','group', 'apps',0,'');-- 11
 
 -- Roles iniciales
 INSERT INTO role(name,state) VALUES('Super Administrador','A');-- 1

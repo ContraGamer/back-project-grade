@@ -1,11 +1,14 @@
 package com.ud.csrf.test.Model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import lombok.Data;
 
@@ -27,6 +30,8 @@ public class Permit {
     @Column(name = "icon", nullable = false)
     private String icon;
     @Column(name = "parent")
+    @Transient
+    private List<Permit> children;
     private long parent;
     @Column(name = "url", nullable = false)
     private String url;

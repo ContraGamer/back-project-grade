@@ -103,3 +103,5 @@ CREATE TABLE movements(
 -- ALTER TABLE movements ADD COMUMN date TIMESTAMP DEFAULT now();
 -- ALTER TABLE movements ADD COLUMN date TIMESTAMP;
 -- ALTER TABLE movements ADD COLUMN code VARCHAR(10);
+-- UPDATE parameter SET state='A' WHERE id=8;
+-- UPDATE parameter SET state='I' WHERE id=6;

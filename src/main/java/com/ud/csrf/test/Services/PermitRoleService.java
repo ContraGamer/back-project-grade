@@ -25,10 +25,22 @@ public class PermitRoleService {
 
     public List<Permit> getPermitByToken(final HttpServletRequest httpServletRequest) {
         List<Permit> listRes = new ArrayList<Permit>();
+        List<Permit> listGroup = new ArrayList<Permit>();
         try {
             FinalUser finalUser = additionalsService.getUserToToken("secret", additionalsService.getToken(httpServletRequest));
-            for (PermitRole permitRole: permitRoleRepository.findByRole(finalUser.getRole()).get()) {
+            List<PermitRole> dataList = permitRoleRepository.findByRole(finalUser.getRole()).get();
+            for (PermitRole permitRole: dataList) {
                 Permit permit = new Permit();
+                if(permit.getParent() == 0){
+                    for (PermitRole permitRole2: dataList) {
+                        if(permitRole2.getPermit().getParent() == permit.getId()){
+                            listGroup.add(permitRole2.getPermit());
+                        }
+                    }
+                    permit.setChildren(listGroup);
+                    listRes.add(permit);
+                    listGroup = new ArrayList<Permit>();
+                }
                 permit = permitRole.getPermit();
                 listRes.add(permit);
             }
