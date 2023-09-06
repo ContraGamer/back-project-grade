@@ -38,6 +38,7 @@ public class PermitRoleService {
                         permit2 = permitRole2.getPermit();
                         if(permit2.getParent() == permit.getId()){
                             listGroup.add(permit2);
+                            permit.setChildren(listGroup);
                         }
                     }
                     listRes.add(permit);
