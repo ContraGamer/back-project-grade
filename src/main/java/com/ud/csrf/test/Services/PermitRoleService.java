@@ -31,17 +31,17 @@ public class PermitRoleService {
             List<PermitRole> dataList = permitRoleRepository.findByRole(finalUser.getRole()).get();
             for (PermitRole permitRole: dataList) {
                 Permit permit = new Permit();
+                permit = permitRole.getPermit();
                 if(permit.getParent() == 0){
-                    for (PermitRole permitRole2: dataList) {
-                        if(permitRole2.getPermit().getParent() == permit.getId()){
-                            listGroup.add(permitRole2.getPermit());
+                    for (PermitRole permitRole2 : dataList) {
+                        Permit permit2 = new Permit();
+                        permit2 = permitRole2.getPermit();
+                        if(permit2.getParent() == permit.getId()){
+                            listGroup.add(permit2);
                         }
                     }
-                    permit.setChildren(listGroup);
                     listRes.add(permit);
                 }
-                permit = permitRole.getPermit();
-                listRes.add(permit);
             }
 
         } catch (Exception e) {
