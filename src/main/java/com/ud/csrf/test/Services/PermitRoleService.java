@@ -39,7 +39,6 @@ public class PermitRoleService {
                     }
                     permit.setChildren(listGroup);
                     listRes.add(permit);
-                    listGroup = new ArrayList<Permit>();
                 }
                 permit = permitRole.getPermit();
                 listRes.add(permit);
