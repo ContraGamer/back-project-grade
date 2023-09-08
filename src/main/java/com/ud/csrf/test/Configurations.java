@@ -53,7 +53,7 @@ public class Configurations {
                 System.out.println("SEGURIDAD CERO");
                 registry.addMapping("/**")
                         .allowedOrigins("*")
-                        .allowedMethods("GET", "POST", "PUT","DELETE").allowCredentials(true).allowedHeaders("*");
+                        .allowedMethods("GET", "POST", "PUT","DELETE").allowCredentials(false).allowedHeaders("*");
             }
 
             public void mediumSecurity(CorsRegistry registry) {
