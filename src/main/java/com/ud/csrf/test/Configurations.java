@@ -44,7 +44,7 @@ public class Configurations {
                         System.out.println("SEGURIDAD POR DEFECTO");
                         registry.addMapping("/**")
                         .allowedOrigins("*")
-                        .allowedMethods("GET", "POST", "PUT","DELETE").allowCredentials(false).allowedHeaders("*");
+                        .allowedMethods("GET", "POST", "PUT","DELETE").allowCredentials(true).allowedHeaders("*");
                     }
                 }
             }
