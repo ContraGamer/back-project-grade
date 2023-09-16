@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.ud.csrf.test.DTO.CreateAcountRequestDTO;
 import com.ud.csrf.test.DTO.CreateAcountResponseDTO;
+import com.ud.csrf.test.DTO.GenericResponseDTO;
 import com.ud.csrf.test.DTO.MovementsRequestDTO;
 import com.ud.csrf.test.Model.Acount;
 import com.ud.csrf.test.Model.FinalUser;
@@ -40,7 +41,7 @@ public class AcountService {
      * @param cantTranfer
      * @return
      */
-    public String tranferAcountToAcount(final HttpServletRequest httpServletRequest, String originNumber, String destinyNumber, BigDecimal cantTranfer){
+    public GenericResponseDTO<String>  tranferAcountToAcount(final HttpServletRequest httpServletRequest, String originNumber, String destinyNumber, BigDecimal cantTranfer){
         Acount origin = acountRepository.findByNumber(originNumber).get();
         Acount destiny = acountRepository.findByNumber(destinyNumber).get();
         BigDecimal originAmount = new BigDecimal(origin.getAmount()).add(cantTranfer.negate());
@@ -52,10 +53,20 @@ public class AcountService {
             acountRepository.save(destiny);
             System.out.println("Transacción exitosa entre la cuenta: "+ originNumber + " a la cuenta: " + destinyNumber);
             movementsService.insertMovement(httpServletRequest, setDataInsertMovement(originNumber, destinyNumber, cantTranfer.toString()));
-            return "Transacción exitosa entre la cuenta: "+ originNumber + " a la cuenta: " + destinyNumber;
+            movementsService.insertMovement(httpServletRequest, setDataInsertMovement(destinyNumber, originNumber, cantTranfer.toString()));
+            GenericResponseDTO<String> response = new GenericResponseDTO<String>();
+            response.setData("Se ha agregado con exito el movimiento");
+            response.setMessage("Se ha agregado con exito el movimiento");
+            response.setStatus(0);
+            return response;
         }else{
             System.out.println("Transacción fallida la cuenta " + originNumber + " no cuenta con saldo suficiente ");
-            return "Transacción fallida la cuenta " + originNumber + " no cuenta con saldo suficiente ";
+            GenericResponseDTO<String> response = new GenericResponseDTO<String>();
+            response.setData("La transacción ha fallado");
+            response.setMessage("La transacción ha fallado");
+            response.setStatus(1);
+            return response;
+            // return "Transacción fallida la cuenta " + originNumber + " no cuenta con saldo suficiente ";
         }
 
     }
