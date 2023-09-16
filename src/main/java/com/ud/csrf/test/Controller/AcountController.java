@@ -74,8 +74,8 @@ public class AcountController {
     @PostMapping("/transferToAcount")
     public GenericResponseDTO<String> transferToAcount(final HttpServletRequest httpServletRequest, @RequestParam String originNumber, @RequestParam String destinyNumber,
             @RequestParam String cantTranfer) {
-        String response = acountService.tranferAcountToAcount(httpServletRequest, originNumber, destinyNumber, new BigDecimal(cantTranfer));
-        return additionalsService.responseController(response, 0);
+        GenericResponseDTO<String> response = acountService.tranferAcountToAcount(httpServletRequest, originNumber, destinyNumber, new BigDecimal(cantTranfer));
+        return additionalsService.responseController(response.getData(), response.getStatus());
     }
 
     /**
@@ -89,9 +89,9 @@ public class AcountController {
     @PostMapping("/transferToAcount2")
     public GenericResponseDTO<String> transferToAcount2(final HttpServletRequest httpServletRequest, @RequestBody TransferToAcountDTO transferToAcount) {
         System.out.println("transferToAcount: " + transferToAcount);
-        String response = acountService.tranferAcountToAcount(httpServletRequest, transferToAcount.getOriginNumber(), transferToAcount.getDestinyNumber(),
+        GenericResponseDTO<String> response = acountService.tranferAcountToAcount(httpServletRequest, transferToAcount.getOriginNumber(), transferToAcount.getDestinyNumber(),
         new BigDecimal(transferToAcount.getCantTranfer()));
-        return additionalsService.responseController(response, 0);
+        return additionalsService.responseController(response.getData(), response.getStatus(),response.getMessage(),response.getSubMessage());
     }
 
     /**
@@ -105,9 +105,9 @@ public class AcountController {
     @PostMapping("/transferToAcount3")
     public GenericResponseDTO<String> transferToAcount3(final HttpServletRequest httpServletRequest, @RequestParam String originNumber, @RequestParam String destinyNumber, @RequestParam String cantTranfer) {
         System.out.println("originNumber: " + originNumber + " ; destinyNumber: " + destinyNumber + " ; cantTranfer : " + cantTranfer );
-        String response = acountService.tranferAcountToAcount(httpServletRequest, originNumber, destinyNumber,
+        GenericResponseDTO<String> response = acountService.tranferAcountToAcount(httpServletRequest, originNumber, destinyNumber,
         new BigDecimal(cantTranfer));
-        return additionalsService.responseController(response, 0);
+        return additionalsService.responseController(response.getData(), response.getStatus());
     }
 
     /**
