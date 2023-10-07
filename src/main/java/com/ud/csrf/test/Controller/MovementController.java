@@ -32,8 +32,20 @@ public class MovementController {
     @PostMapping("/getMovementsByAccount")
     public List<MovementsResponseDTO> getMovementsByAccount(final HttpServletRequest httpServletRequest,  @RequestBody GenericRequestDTO<String> originAccount){
         List<Movements> list = movementsRepository.findByAcountFirst(originAccount.getData());
+        List<Movements> list2 = movementsRepository.findByAcountSecond(originAccount.getData());
         List<MovementsResponseDTO> listResp = new ArrayList<>();
         for (Movements movement : list){
+            MovementsResponseDTO dato = new MovementsResponseDTO();
+            dato.setOriginAccount(movement.getAcountFirst());
+            dato.setDestinyAccount(movement.getAcountSecond());
+            dato.setTypeMov(movement.getTypeMove());
+            dato.setDate(movement.getDate());
+            dato.setValue(movement.getAmount());
+            dato.setCode(movement.getCode());
+            listResp.add(dato);
+            System.out.println(list.size() + "Data origin: "+ movement.getAcountFirst());
+        }
+        for (Movements movement : list2){
             MovementsResponseDTO dato = new MovementsResponseDTO();
             dato.setOriginAccount(movement.getAcountFirst());
             dato.setDestinyAccount(movement.getAcountSecond());

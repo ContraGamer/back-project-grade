@@ -54,5 +54,10 @@ public class FinalUserController {
         FinalUser user = finalUserService.getUserIntoSession(httpServletRequest);
         return user;
     }
+    @PostMapping("/registerUser")
+    public FinalUser registerUser(final HttpServletRequest httpServletRequest){
+        FinalUser user = finalUserService.getUserIntoSession(httpServletRequest);
+        return user;
+    }
     
 }

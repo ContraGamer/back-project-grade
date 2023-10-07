@@ -53,7 +53,6 @@ public class AcountService {
             acountRepository.save(destiny);
             System.out.println("Transacción exitosa entre la cuenta: "+ originNumber + " a la cuenta: " + destinyNumber);
             movementsService.insertMovement(httpServletRequest, setDataInsertMovement(originNumber, destinyNumber, cantTranfer.toString()));
-            movementsService.insertMovement(httpServletRequest, setDataInsertMovement(destinyNumber, originNumber, cantTranfer.toString()));
             GenericResponseDTO<String> response = new GenericResponseDTO<String>();
             response.setData("Se ha agregado con exito el movimiento");
             response.setMessage("Se ha agregado con exito el movimiento");

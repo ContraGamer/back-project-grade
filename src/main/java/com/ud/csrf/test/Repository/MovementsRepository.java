@@ -13,6 +13,7 @@ import org.springframework.data.repository.query.Param;
 public interface MovementsRepository extends JpaRepository<Movements, Long>{
 
     List<Movements> findByAcountFirst(@Param("acountFirst") String acountFirst);
+    List<Movements> findByAcountSecond(@Param("acountSecond") String acountSecond);
 
     Movements findByCode(@Param("code") String code);
     
