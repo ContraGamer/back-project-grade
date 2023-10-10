@@ -10,5 +10,6 @@ public class CreateAcountRequestDTO {
     private String name;
     private TypeAcount typeAcount;
     private String token;
+    private String amount;
     
 }

@@ -91,7 +91,8 @@ public class AcountService {
      */
     public CreateAcountResponseDTO createAcount(CreateAcountRequestDTO request){
         Acount newAcount =  new Acount();
-        newAcount.setAmount("0");
+        // newAcount.setAmount("0");
+        newAcount.setAmount(request.getAmount());
         String name = request.getName() == null || request.getName().trim() == "" ? request.getTypeAcount().getName() : request.getName();
         newAcount.setName(name);
         int cantidad = request.getTypeAcount().getName().equals("DÉBITO") ? 16 : 12 ;  
