@@ -6,20 +6,46 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer.JwtConfigurer;
+import org.springframework.security.web.csrf.CsrfTokenRepository;
 
 import com.ud.csrf.test.Model.Parameter;
 import com.ud.csrf.test.Repository.ParameterRepository;
+import com.ud.csrf.test.Services.AdditionalsService;
 
 @Configuration
-public class Configurations {
+@EnableWebSecurity
+public class Configurations extends WebSecurityConfigurerAdapter implements WebMvcConfigurer{
 
     @Autowired
     ParameterRepository parameterRepository;
 
+    @Autowired
+    AdditionalsService additionalsService;
+
+    @Autowired
+    HandleInterceptor handleInterceptor;
+
     String CEROSEGURITY = "level-attack-without-security";
     String MEDIUMSECURITY = "level-attack-medium-security";
     String HIGHSECURITY = "level-attack-high-security";
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.csrf().disable(); //deshabilitar CSRF
+    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        // Registra el interceptor
+        registry.addInterceptor(handleInterceptor);
+    }
     
     @Bean
     public WebMvcConfigurer CORSConfigurer(){
