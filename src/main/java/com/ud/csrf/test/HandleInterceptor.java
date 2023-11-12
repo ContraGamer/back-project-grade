@@ -1,6 +1,7 @@
 package com.ud.csrf.test;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,9 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTVerifier;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import com.ud.csrf.test.Model.Parameter;
 import com.ud.csrf.test.Repository.ParameterRepository;
-import com.ud.csrf.test.Services.AdditionalsService;
 
 @Component
 public class HandleInterceptor implements HandlerInterceptor {
@@ -20,20 +24,20 @@ public class HandleInterceptor implements HandlerInterceptor {
     @Autowired
     private ParameterRepository parameterRepository;
 
-    @Autowired
-    private AdditionalsService additionalsService;
-
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
-        String csrfHeader = request.getHeader("X-CSRF-TOKEN");
-        if(addExceptionURL(request, "/user/login")){
+        String exampleHeader = request.getHeader("example-token");
+        String csrfHeader = request.getHeader("x-csrf-token");
+        if (addExceptionURL(request, "/user/login")) {
+            System.out.println("Dato interceptor: " + csrfHeader);            
             return true;
         }
-        System.out.println("Dato interceptor: " + csrfHeader);
-        Boolean data = csrfSecurity(csrfHeader);
-        System.out.println("Dato result: " + data);
-        return data; // Continúa con el procesamiento de la solicitud
+        System.out.println("URL: "+request.getRequestURI()+"; Dato interceptor: " + exampleHeader);
+        Boolean dato = csrfSecurity(exampleHeader);
+        System.out.println("Dato: " + dato);
+        return dato; // Continúa con el procesamiento de la solicitud
+        //return true; // Cuando no funciona el filtro.
     }
 
     private boolean csrfSecurity(String csfrToken) {
@@ -52,7 +56,7 @@ public class HandleInterceptor implements HandlerInterceptor {
                         return (csfrToken.equals("your-csrf-token-value"));
                     case HIGHSECURITY:
                         System.out.println("Requiere validacion de token dinamico");
-                        return additionalsService.verifierJWT("secret", csfrToken);
+                        return verifierJWT("secret", csfrToken);
                     default:
                         return false;
                 }
@@ -62,6 +66,26 @@ public class HandleInterceptor implements HandlerInterceptor {
 
         }
         return false;
+    }
+
+    /**
+     * Verifica si un JWT es autentico y si ya caduco
+     * 
+     * @param secret
+     * @param token
+     * @return
+     */
+    private boolean verifierJWT(String secret, String token) {
+        Algorithm algorithm = Algorithm.HMAC256(secret.getBytes());
+        JWTVerifier jwtVerifier = JWT.require(algorithm).build();
+        try {
+            DecodedJWT decodedJWT = jwtVerifier.verify(token);
+            Date dateToken = decodedJWT.getExpiresAt();
+            return new Date().before(dateToken);
+        } catch (Exception e) {
+            System.out.println(e);
+            return false;
+        }
     }
 
     private boolean addExceptionURL(HttpServletRequest request, String... url) {
