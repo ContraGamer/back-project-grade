@@ -27,15 +27,18 @@ public class HandleInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
-        String exampleHeader = request.getHeader("example-token");
         String csrfHeader = request.getHeader("x-csrf-token");
-        if (addExceptionURL(request, "/user/login")) {
-            System.out.println("Dato interceptor: " + csrfHeader);            
+        if (addExceptionURL(request, "/user/login", "/params/securityParamsActive")) {
+            System.out.println("------------ Interceptor publico -------------");
+            System.out.println("Url: ".concat(request.getRequestURI())); 
+            System.out.println("------------ Fin de interceptor -------------");         
             return true;
         }
-        System.out.println("URL: "+request.getRequestURI()+"; Dato interceptor: " + exampleHeader);
-        Boolean dato = csrfSecurity(exampleHeader);
-        System.out.println("Dato: " + dato);
+        System.out.println("------------ Interfector privado -------------");
+        Boolean dato = csrfSecurity(csrfHeader);
+        System.out.print("Url: ".concat(request.getRequestURI())); 
+        System.out.println(" Resultado: " + dato);
+        System.out.println("------------ Fin de interceptor -------------");   
         return dato; // Continúa con el procesamiento de la solicitud
         //return true; // Cuando no funciona el filtro.
     }

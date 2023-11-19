@@ -21,14 +21,20 @@ public class ParameterController {
     ParameterRepository parameterRepository;
 
     @PostMapping("/securityParams")
-    private List<Parameter> securityParams(@RequestBody GetAllParamsWebRequestDTO getAllParamsWebRequestDTO){
+    private List<Parameter> securityParams(@RequestBody GetAllParamsWebRequestDTO getAllParamsWebRequestDTO) {
         System.out.println("of: ".concat(getAllParamsWebRequestDTO.getOf()));
         return parameterRepository.findByOf(getAllParamsWebRequestDTO.getOf()).get();
     }
 
     @GetMapping("/getParams")
-    private List<Parameter> getParams(){
+    private List<Parameter> getParams() {
         return parameterRepository.findAll();
     }
-    
+
+    @PostMapping("/securityParamsActive")
+    private List<Parameter> securityParamsActive(@RequestBody GetAllParamsWebRequestDTO getAllParamsWebRequestDTO) {
+        System.out.println("of: ".concat(getAllParamsWebRequestDTO.getOf()));
+        return parameterRepository.findByOfAndState(getAllParamsWebRequestDTO.getOf(), "A").get();
+    }
+
 }

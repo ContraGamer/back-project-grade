@@ -61,6 +61,8 @@ public class Configurations extends WebSecurityConfigurerAdapter implements WebM
         config.addAllowedMethod("POST");
         config.addAllowedMethod("PUT");
         config.addAllowedMethod("DELETE");
+        // config.setAllowCredentials(true);
+        // config.addAllowedOrigin("");
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
     }
