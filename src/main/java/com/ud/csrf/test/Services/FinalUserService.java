@@ -30,6 +30,7 @@ public class FinalUserService {
 
     /**
      * Abre sesion en la cuenta.
+     * 
      * @param login
      * @return
      * @throws Exception
@@ -49,6 +50,7 @@ public class FinalUserService {
 
     /**
      * Cierra session al eliminar el JWT del usuario.
+     * 
      * @param httpServletRequest
      * @param httpServletResponse
      * @return
@@ -98,15 +100,21 @@ public class FinalUserService {
 
     /**
      * Obtiene el usuario que esta en session por medio del token JWT.
+     * 
      * @param httpServletRequest
      * @return
      */
-    public FinalUser getUserIntoSession(final HttpServletRequest httpServletRequest){
-        String token = httpServletRequest.getHeader("authorization").split(" ")[1];
-        if(additionalsService.verifierJWT("secret", token)){
-           return additionalsService.getUserToToken("secret", token);
+    public FinalUser getUserIntoSession(final HttpServletRequest httpServletRequest) {
+        try {
+            String token = httpServletRequest.getHeader("authorization").split(" ")[1];
+            if (additionalsService.verifierJWT("secret", token)) {
+                return additionalsService.getUserToToken("secret", token);
+            }
+            return new FinalUser();
+        } catch (Exception e) {
+            System.out.println("Se genera usuario nuevo por no encontrar el token de authorizacion");
+            return new FinalUser();
         }
-        return new FinalUser();
     }
 
 }

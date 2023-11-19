@@ -94,4 +94,8 @@ INSERT INTO parameter(key, value, state, of, additional) VALUES('environment-dev
 INSERT INTO parameter(key, value, state, of, additional) VALUES('environment-laboratory', '', 'I', 'BACK', '');
 INSERT INTO parameter(key, value, state, of, additional) VALUES('environment-prod', '', 'I', 'BACK', '');
 INSERT INTO parameter(key, value, state, of, additional) VALUES('time-session', '100', 'A', 'BACK', 'minutes');
--- 
+-- Update data security
+UPDATE parameter SET state='A' WHERE key='level-attack-without-security';
+UPDATE parameter SET state='I' WHERE key='level-attack-medium-security';
+UPDATE parameter SET state='I' WHERE key='level-attack-high-security';
+
