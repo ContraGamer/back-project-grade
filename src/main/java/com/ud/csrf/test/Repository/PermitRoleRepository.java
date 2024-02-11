@@ -13,5 +13,7 @@ import com.ud.csrf.test.Model.Role;
 public interface PermitRoleRepository extends JpaRepository<PermitRole, Long>{
 
         Optional<List<PermitRole>> findByRole(@Param("role") Role role);
+        
+        Optional<List<PermitRole>> findByIdGreaterThanEqual(@Param("id") long id);
     
 }

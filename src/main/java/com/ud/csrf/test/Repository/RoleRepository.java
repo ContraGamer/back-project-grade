@@ -1,5 +1,6 @@
 package com.ud.csrf.test.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,5 +13,7 @@ import com.ud.csrf.test.Model.Role;
 public interface RoleRepository extends JpaRepository<Role, Long>{
 
     Optional<Role> findByName(@Param("name") String name);
+
+    Optional<List<Role>> findByIdGreaterThanEqual(@Param("id") long id);
     
 }

@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ud.csrf.test.Services.PermitRoleService;
+import com.ud.csrf.test.DTO.RolListDTO;
 import com.ud.csrf.test.Model.Permit;
+import com.ud.csrf.test.Model.PermitRole;
 import com.ud.csrf.test.Model.Role;
 
 @RestController
@@ -23,13 +25,23 @@ public class PermitRoleController {
     private PermitRoleService permitRoleService;
 
     @GetMapping("/get-permit")
-    private List<Permit> getPermitByRol(final HttpServletRequest httpServletRequest){
+    private List<Permit> getPermitByRol(final HttpServletRequest httpServletRequest) {
         return permitRoleService.getPermitByToken(httpServletRequest);
     }
 
     @PostMapping("/get-permit-by-role")
-    private List<Permit> getPermitByRol(final HttpServletRequest httpServletRequest, @RequestBody Role role){
+    private List<Permit> getPermitByRol(final HttpServletRequest httpServletRequest, @RequestBody Role role) {
         return permitRoleService.getPermitByRole(role);
     }
-    
+
+    @PostMapping("/get-permit-by-role-admin")
+    private List<RolListDTO> getPermitByRolAdmin(final HttpServletRequest httpServletRequest) {
+        return permitRoleService.getPermitByTokenAdmin(httpServletRequest);
+    }
+
+    @GetMapping("/get-goles-and-permits-by-user")
+    private List<PermitRole> getRolesAndPermitsByUser(final HttpServletRequest httpServletRequest){
+        return permitRoleService.getRolesAndPermitsByUser(httpServletRequest);
+    }
+
 }
