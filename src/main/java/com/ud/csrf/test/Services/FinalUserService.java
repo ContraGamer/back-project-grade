@@ -1,6 +1,7 @@
 package com.ud.csrf.test.Services;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,6 +14,7 @@ import com.ud.csrf.test.DTO.LogUpRequestDTO;
 import com.ud.csrf.test.DTO.LogUpResponseDTO;
 import com.ud.csrf.test.DTO.LoginDTO;
 import com.ud.csrf.test.Model.FinalUser;
+import com.ud.csrf.test.Model.Role;
 import com.ud.csrf.test.Repository.FinalUserRepository;
 import com.ud.csrf.test.Repository.RoleRepository;
 
@@ -115,6 +117,10 @@ public class FinalUserService {
             System.out.println("Se genera usuario nuevo por no encontrar el token de authorizacion");
             return new FinalUser();
         }
+    }
+
+    public List<FinalUser> getAllUsersByRole (Role role){
+        return finalUserRepository.findByRoleGreaterThan(role);
     }
 
 }

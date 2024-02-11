@@ -4,14 +4,16 @@
 INSERT INTO permit(state,name,type,icon,parent,url) VALUES('A', 'Administración','group', 'apps',0,'');-- 1
 INSERT INTO permit(state,name,type,icon,parent,url) VALUES('A', 'Cuenta','group', 'apps',0,'');-- 2
 INSERT INTO permit(state,name,type,icon,parent,url) VALUES('A', 'Transacciones','group', 'apps',0,'');-- 3
-INSERT INTO permit(state,name,type,icon,parent,url) VALUES('A', 'Usuarios','item', 'apps',1,'');-- 4
-INSERT INTO permit(state,name,type,icon,parent,url) VALUES('A', 'Roles','item', 'apps',1,'');-- 5
-INSERT INTO permit(state,name,type,icon,parent,url) VALUES('A', 'Permisos','item', 'apps',1,'');-- 6
+INSERT INTO permit(state,name,type,icon,parent,url) VALUES('A', 'Usuarios','item', 'apps',1,'admin');-- 4
+INSERT INTO permit(state,name,type,icon,parent,url) VALUES('A', 'Roles','item', 'apps',1,'admin');-- 5
+INSERT INTO permit(state,name,type,icon,parent,url) VALUES('A', 'Permisos','item', 'apps',1,'admin');-- 6
 INSERT INTO permit(state,name,type,icon,parent,url) VALUES('A', 'Gestionar','item', 'apps',2,'');-- 7
 INSERT INTO permit(state,name,type,icon,parent,url) VALUES('A', 'Movimientos','item', 'apps',3,'');--8
 INSERT INTO permit(state,name,type,icon,parent,url) VALUES('A', 'Trasferir','item', 'apps',3,'');-- 9
 INSERT INTO permit(state,name,type,icon,parent,url) VALUES('A', 'Recargar','item', 'apps',3,'');-- 10
-INSERT INTO permit(state,name,type,icon,parent,url) VALUES('A', 'Inicio','group', 'apps',0,'');-- 11
+INSERT INTO permit(state,name,type,icon,parent,url) VALUES('A', 'Inicio','group', 'apps',0,'init');-- 11
+INSERT INTO permit(state,name,type,icon,parent,url) VALUES('A', 'Agregar productos','group', 'apps',2,'account');-- 12
+INSERT INTO permit(state,name,type,icon,parent,url) VALUES('A', 'Configuraciones','group', 'apps',0,'account');-- 13
 
 -- Roles iniciales
 INSERT INTO role(name,state) VALUES('Super Administrador','A');-- 1
@@ -29,6 +31,9 @@ INSERT INTO permit_role(permit,role) VALUES(7,1);
 INSERT INTO permit_role(permit,role) VALUES(8,1);
 INSERT INTO permit_role(permit,role) VALUES(9,1);
 INSERT INTO permit_role(permit,role) VALUES(10,1);
+INSERT INTO permit_role(permit,role) VALUES(11,1);
+INSERT INTO permit_role(permit,role) VALUES(12,1);
+INSERT INTO permit_role(permit,role) VALUES(13,1);
 
 -- Permisos para Administrador
 INSERT INTO permit_role(permit,role) VALUES(1,2);
@@ -39,6 +44,9 @@ INSERT INTO permit_role(permit,role) VALUES(7,2);
 INSERT INTO permit_role(permit,role) VALUES(8,2);
 INSERT INTO permit_role(permit,role) VALUES(9,2);
 INSERT INTO permit_role(permit,role) VALUES(10,2);
+INSERT INTO permit_role(permit,role) VALUES(11,2);
+INSERT INTO permit_role(permit,role) VALUES(12,2);
+INSERT INTO permit_role(permit,role) VALUES(13,2);
 
 -- Permisos para Cliente
 INSERT INTO permit_role(permit,role) VALUES(2,3);
@@ -47,6 +55,9 @@ INSERT INTO permit_role(permit,role) VALUES(7,3);
 INSERT INTO permit_role(permit,role) VALUES(8,3);
 INSERT INTO permit_role(permit,role) VALUES(9,3);
 INSERT INTO permit_role(permit,role) VALUES(10,3);
+INSERT INTO permit_role(permit,role) VALUES(11,3);
+INSERT INTO permit_role(permit,role) VALUES(12,3);
+INSERT INTO permit_role(permit,role) VALUES(13,3);
 
 -- Super administrador
 INSERT INTO final_user(name,auth_type,email,password,cellphone,role,creation_date,address,identification,id_type,state)
