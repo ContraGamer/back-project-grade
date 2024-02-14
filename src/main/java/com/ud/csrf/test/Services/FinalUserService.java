@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ud.csrf.test.DTO.EditEmailRequestDTO;
+import com.ud.csrf.test.DTO.EditPassRequestDTO;
 import com.ud.csrf.test.DTO.LogOutResponseDTO;
 import com.ud.csrf.test.DTO.LogUpRequestDTO;
 import com.ud.csrf.test.DTO.LogUpResponseDTO;
@@ -121,6 +123,42 @@ public class FinalUserService {
 
     public List<FinalUser> getAllUsersByRole (Role role){
         return finalUserRepository.findByRoleGreaterThan(role);
+    }
+
+    //Editar password
+    public LogOutResponseDTO editPass(final HttpServletRequest httpServletRequest,EditPassRequestDTO editPass){
+        LogOutResponseDTO response = new LogOutResponseDTO();
+        String token = httpServletRequest.getHeader("authorization").split(" ")[1];
+        if (additionalsService.verifierJWT("secret", token)) {
+            FinalUser finalUser = additionalsService.getUserToToken("secret", token);
+            finalUser.setPassword(editPass.getPassword());
+            finalUserRepository.save(finalUser);
+            response.setTitle("Se realizo el cambio correctamente");
+            response.setDescription("Usuario actualizado correctamente");
+        } else {
+            response.setTitle("Usuario no encontrado, verifiqué la información.");
+            response.setDescription("");
+        }
+        return response;
+
+    }
+    //Editar email
+    public LogOutResponseDTO editEmail(final HttpServletRequest httpServletRequest,EditEmailRequestDTO editEmail){
+        LogOutResponseDTO response = new LogOutResponseDTO();
+        String token = httpServletRequest.getHeader("authorization").split(" ")[1];
+        if (additionalsService.verifierJWT("secret", token)) {
+            FinalUser finalUser = additionalsService.getUserToToken("secret", token);
+            finalUser.setPassword(editEmail.getPassword());
+            finalUser.setEmail(editEmail.getEmail());
+            finalUserRepository.save(finalUser);
+            response.setTitle("Se realizo el cambio correctamente");
+            response.setDescription("Usuario actualizado correctamente");
+        } else {
+            response.setTitle("Usuario no encontrado, verifiqué la información.");
+            response.setDescription("");
+        }
+        return response;
+
     }
 
 }
