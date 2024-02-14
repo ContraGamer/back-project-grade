@@ -66,6 +66,11 @@ public class FinalUserController {
                     additionalsService.getToken(httpServletRequest));
         return finalUserService.getAllUsersByRole(finalUser.getRole());
     }
+    @PostMapping("/registerUser")
+    public LogUpResponseDTO registerUser(final HttpServletRequest httpServletRequest, @RequestBody LogUpRequestDTO request){
+        
+        return finalUserService.logUp(request);
+    }
     //editar contraseña
     @PostMapping("/editpass")
     public LogOutResponseDTO editPass(final HttpServletRequest httpServletRequest, @RequestBody EditPassRequestDTO request){
