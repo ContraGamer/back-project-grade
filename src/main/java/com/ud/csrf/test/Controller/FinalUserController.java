@@ -17,6 +17,8 @@ import com.ud.csrf.test.DTO.LogOutResponseDTO;
 import com.ud.csrf.test.DTO.LogUpRequestDTO;
 import com.ud.csrf.test.DTO.LogUpResponseDTO;
 import com.ud.csrf.test.DTO.LoginDTO;
+import com.ud.csrf.test.DTO.EditEmailRequestDTO;
+import com.ud.csrf.test.DTO.EditPassRequestDTO;
 import com.ud.csrf.test.Model.FinalUser;
 import com.ud.csrf.test.Services.AdditionalsService;
 import com.ud.csrf.test.Services.FinalUserService;
@@ -63,6 +65,18 @@ public class FinalUserController {
         FinalUser finalUser = additionalsService.getUserToToken("secret",
                     additionalsService.getToken(httpServletRequest));
         return finalUserService.getAllUsersByRole(finalUser.getRole());
+    }
+    //editar contraseña
+    @PostMapping("/editpass")
+    public LogOutResponseDTO editPass(final HttpServletRequest httpServletRequest, @RequestBody EditPassRequestDTO request){
+        
+        return finalUserService.editPass(httpServletRequest,request);
+    }
+    //editar correo
+    @PostMapping("/editemail")
+    public LogOutResponseDTO editemail(final HttpServletRequest httpServletRequest, @RequestBody EditEmailRequestDTO request){
+
+        return finalUserService.editEmail(httpServletRequest,request);
     }
     
 }
