@@ -1,5 +1,7 @@
 package com.ud.csrf.test.Controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -54,6 +56,13 @@ public class FinalUserController {
     public FinalUser getUserToken(final HttpServletRequest httpServletRequest){
         FinalUser user = finalUserService.getUserIntoSession(httpServletRequest);
         return user;
+    }
+
+    @GetMapping("/getUsersByRoleToken")
+    public List<FinalUser> getAllUsersByRoleToken(final HttpServletRequest httpServletRequest){
+        FinalUser finalUser = additionalsService.getUserToToken("secret",
+                    additionalsService.getToken(httpServletRequest));
+        return finalUserService.getAllUsersByRole(finalUser.getRole());
     }
     
 }
