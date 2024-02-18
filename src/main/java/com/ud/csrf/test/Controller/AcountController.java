@@ -130,9 +130,9 @@ public class AcountController {
      */
     @PostMapping("/createAcount")
     public CreateAcountResponseDTO createAcount(final HttpServletRequest httpServletRequest, @RequestBody CreateAcountRequestDTO request){
-        String token = httpServletRequest.getHeader("authorization").split(" ")[1];
+        String token = additionalsService.getToken(httpServletRequest);
         if(additionalsService.verifierJWT("secret", token)){
-            request.setToken(httpServletRequest.getHeader("authorization").split(" ")[1]);
+            request.setToken(token);
         }
         return acountService.createAcount(request);
     }

@@ -15,5 +15,7 @@ public interface PermitRoleRepository extends JpaRepository<PermitRole, Long>{
         Optional<List<PermitRole>> findByRole(@Param("role") Role role);
         
         Optional<List<PermitRole>> findByIdGreaterThanEqual(@Param("id") long id);
+
+        Optional<List<PermitRole>> findByRoleGreaterThanEqual(@Param("role") Role role);
     
 }

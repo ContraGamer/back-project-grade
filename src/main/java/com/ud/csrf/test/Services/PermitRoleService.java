@@ -8,12 +8,15 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ud.csrf.test.DTO.DataRolePermitDTO;
 import com.ud.csrf.test.DTO.RolListDTO;
 import com.ud.csrf.test.Model.FinalUser;
 import com.ud.csrf.test.Model.Permit;
 import com.ud.csrf.test.Model.PermitRole;
 import com.ud.csrf.test.Model.Role;
+import com.ud.csrf.test.Repository.PermitRepository;
 import com.ud.csrf.test.Repository.PermitRoleRepository;
+import com.ud.csrf.test.Repository.RoleRepository;
 
 @Service
 public class PermitRoleService {
@@ -23,6 +26,9 @@ public class PermitRoleService {
 
     @Autowired
     AdditionalsService additionalsService;
+
+    @Autowired
+    RoleRepository roleRepository;
 
     public List<Permit> getPermitByToken(final HttpServletRequest httpServletRequest) {
         List<Permit> listRes = new ArrayList<Permit>();
@@ -105,18 +111,34 @@ public class PermitRoleService {
         return false;
     }
 
-    public List<PermitRole> getRolesAndPermitsByUser(final HttpServletRequest httpServletRequest){
+    public List<DataRolePermitDTO> getRolesAndPermitsByUser(final HttpServletRequest httpServletRequest){
         List<PermitRole> dataList = new ArrayList<>();
+        List<DataRolePermitDTO> listRes  = new ArrayList<>();
         try {
-            FinalUser finalUser = additionalsService.getUserToToken("secret",
-                    additionalsService.getToken(httpServletRequest));
-                    List<PermitRole> dataListAux = permitRoleRepository.findByRole(finalUser.getRole()).get();
-                   dataList = permitRoleRepository.findByIdGreaterThanEqual(dataListAux.get(0).getId()).get();
-            
+            FinalUser finalUser = additionalsService.getUserToToken("secret", additionalsService.getToken(httpServletRequest));
+            dataList = permitRoleRepository.findByRoleGreaterThanEqual(finalUser.getRole()).get();
+
+            for (Role role : roleRepository.findAll()) {
+                DataRolePermitDTO data = new DataRolePermitDTO();
+                List<Permit> dataPermits = new ArrayList<Permit>();
+                for (PermitRole permitRole2 : dataList) {
+                    if(role.equals(permitRole2.getRole())){
+                        data.setRole(role);
+                        dataPermits.add(permitRole2.getPermit());
+                    } else if(role.equals(permitRole2.getRole())){
+                        dataPermits.add(permitRole2.getPermit());
+                    } 
+                }
+                
+                if(dataPermits.size() > 0){
+                    data.setPermits(dataPermits);
+                    listRes.add(data);
+                }
+            }
         } catch (Exception e) {
             
         }
-        return dataList;
+        return listRes;
     }
 
 }

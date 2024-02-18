@@ -172,11 +172,16 @@ public class AdditionalsService {
 
     public String getToken(final HttpServletRequest httpServletRequest) {
         try {
-            return httpServletRequest.getHeader("authorization").split(" ")[1];
+            if (null != httpServletRequest.getHeader("authorization")) {
+                return httpServletRequest.getHeader("authorization").split(" ")[1];
+            } else if (null != httpServletRequest.getHeader("cookie")) {
+                return (httpServletRequest.getHeader("cookie")+"").split("token=")[1];
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return "valueNull";
         }
+        return null;
     }
 
     public String getHeaderCSRF(final HttpServletRequest httpServletRequest) {

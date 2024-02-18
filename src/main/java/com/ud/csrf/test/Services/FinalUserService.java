@@ -62,7 +62,7 @@ public class FinalUserService {
     public LogOutResponseDTO logOut(final HttpServletRequest httpServletRequest,
             final HttpServletResponse httpServletResponse) {
         LogOutResponseDTO response = new LogOutResponseDTO();
-        String token = httpServletRequest.getHeader("authorization").split(" ")[1];
+        String token = additionalsService.getToken(httpServletRequest);
         if (additionalsService.verifierJWT("secret", token)) {
             FinalUser finalUser = additionalsService.getUserToToken("secret", token);
             finalUser.setTokens(finalUser.getTokens().replace(token.trim(), ""));
@@ -110,7 +110,7 @@ public class FinalUserService {
      */
     public FinalUser getUserIntoSession(final HttpServletRequest httpServletRequest) {
         try {
-            String token = httpServletRequest.getHeader("authorization").split(" ")[1];
+            String token = additionalsService.getToken(httpServletRequest);
             if (additionalsService.verifierJWT("secret", token)) {
                 return additionalsService.getUserToToken("secret", token);
             }
@@ -128,7 +128,7 @@ public class FinalUserService {
     //Editar password
     public LogOutResponseDTO editPass(final HttpServletRequest httpServletRequest,EditPassRequestDTO editPass){
         LogOutResponseDTO response = new LogOutResponseDTO();
-        String token = httpServletRequest.getHeader("authorization").split(" ")[1];
+        String token = additionalsService.getToken(httpServletRequest);
         if (additionalsService.verifierJWT("secret", token)) {
             FinalUser finalUser = additionalsService.getUserToToken("secret", token);
             finalUser.setPassword(editPass.getPassword());
@@ -145,7 +145,7 @@ public class FinalUserService {
     //Editar email
     public LogOutResponseDTO editEmail(final HttpServletRequest httpServletRequest,EditEmailRequestDTO editEmail){
         LogOutResponseDTO response = new LogOutResponseDTO();
-        String token = httpServletRequest.getHeader("authorization").split(" ")[1];
+        String token = additionalsService.getToken(httpServletRequest);
         if (additionalsService.verifierJWT("secret", token)) {
             FinalUser finalUser = additionalsService.getUserToToken("secret", token);
             finalUser.setPassword(editEmail.getPassword());

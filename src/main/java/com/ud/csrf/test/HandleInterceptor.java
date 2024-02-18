@@ -1,9 +1,13 @@
 package com.ud.csrf.test;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -28,6 +32,7 @@ public class HandleInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
         String csrfHeader = request.getHeader("x-csrf-token");
+        
         if (addExceptionURL(request, "/user/login", "/params/securityParamsActive")) {
             System.out.println("------------ Interceptor publico -------------");
             System.out.println("Url: ".concat(request.getRequestURI())); 

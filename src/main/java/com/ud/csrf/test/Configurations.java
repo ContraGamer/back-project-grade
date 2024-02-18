@@ -54,8 +54,12 @@ public class Configurations extends WebSecurityConfigurerAdapter implements WebM
     public CorsFilter corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
-        config.addAllowedOrigin("*"); // Permitir solicitudes desde cualquier origen
+        config.addAllowedOrigin("http://localhost:4200"); // Permitir solicitudes desde cualquier origen
+        config.addAllowedOrigin("https://bank-sim-project.firebaseapp.com");
+        config.addAllowedOrigin("https://bank-sim-project.web.app");
+        config.addAllowedOrigin("http://localhost:65073");
         config.addAllowedHeader("*"); // Permitir cualquier encabezado
+        config.setAllowCredentials(true);
         config.addAllowedMethod("OPTIONS");
         config.addAllowedMethod("GET");
         config.addAllowedMethod("POST");

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ud.csrf.test.Services.PermitRoleService;
+import com.ud.csrf.test.DTO.DataRolePermitDTO;
 import com.ud.csrf.test.DTO.RolListDTO;
 import com.ud.csrf.test.Model.Permit;
 import com.ud.csrf.test.Model.PermitRole;
@@ -40,7 +41,7 @@ public class PermitRoleController {
     }
 
     @GetMapping("/get-goles-and-permits-by-user")
-    private List<PermitRole> getRolesAndPermitsByUser(final HttpServletRequest httpServletRequest){
+    private List<DataRolePermitDTO> getRolesAndPermitsByUser(final HttpServletRequest httpServletRequest){
         return permitRoleService.getRolesAndPermitsByUser(httpServletRequest);
     }
 
