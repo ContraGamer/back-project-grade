@@ -28,7 +28,7 @@ public class HandleInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
         String csrfHeader = request.getHeader("x-csrf-token");
-        if (addExceptionURL(request, "/user/login", "/params/securityParamsActive")) {
+        if (addExceptionURL(request, "/user/login", "/params/securityParamsActive","/user/registerUser")) {
             System.out.println("------------ Interceptor publico -------------");
             System.out.println("Url: ".concat(request.getRequestURI())); 
             System.out.println("------------ Fin de interceptor -------------");         
