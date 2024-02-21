@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ud.csrf.test.Repository.ParameterRepository;
+import com.ud.csrf.test.Services.ParameterService;
 import com.ud.csrf.test.DTO.GetAllParamsWebRequestDTO;
 import com.ud.csrf.test.Model.Parameter;
 
@@ -19,6 +20,9 @@ public class ParameterController {
 
     @Autowired
     ParameterRepository parameterRepository;
+
+    @Autowired
+    ParameterService parameterService;
 
     @PostMapping("/securityParams")
     private List<Parameter> securityParams(@RequestBody GetAllParamsWebRequestDTO getAllParamsWebRequestDTO) {
@@ -35,6 +39,12 @@ public class ParameterController {
     private List<Parameter> securityParamsActive(@RequestBody GetAllParamsWebRequestDTO getAllParamsWebRequestDTO) {
         System.out.println("of: ".concat(getAllParamsWebRequestDTO.getOf()));
         return parameterRepository.findByOfAndState(getAllParamsWebRequestDTO.getOf(), "A").get();
+    }
+
+    @PostMapping("/otherParams")
+    private List<Parameter> otherParams(@RequestBody GetAllParamsWebRequestDTO getAllParamsWebRequestDTO) {
+        System.out.println("of: ".concat(getAllParamsWebRequestDTO.getOf()));
+        return parameterService.getOthersParams(getAllParamsWebRequestDTO.getOf());
     }
 
 }

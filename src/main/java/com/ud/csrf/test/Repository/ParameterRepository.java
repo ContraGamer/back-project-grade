@@ -19,4 +19,5 @@ public interface ParameterRepository extends JpaRepository<Parameter, Long>{
     Optional<Parameter> findByKey(@Param("key") String key);
 
     Optional<Parameter> findByKeyAndState(@Param("key") String key, @Param("state") String state);
+
 }
