@@ -148,7 +148,6 @@ public class FinalUserService {
         String token = additionalsService.getToken(httpServletRequest);
         if (additionalsService.verifierJWT("secret", token)) {
             FinalUser finalUser = additionalsService.getUserToToken("secret", token);
-            finalUser.setPassword(editEmail.getPassword());
             finalUser.setEmail(editEmail.getEmail());
             finalUserRepository.save(finalUser);
             response.setTitle("Se realizo el cambio correctamente");
