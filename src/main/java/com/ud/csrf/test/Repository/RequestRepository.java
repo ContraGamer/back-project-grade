@@ -13,6 +13,8 @@ public interface RequestRepository extends JpaRepository<Request, Long>{
     
     List<Request> findByOrderByDateTimeStartAsc();
 
+    List<Request> findByOrderByDateTimeStartDesc();
+
     Long countByStatusHttp(@Param("statusHttp") String statusHttp);
 
     Long countByStatusHttpAndSecurityLevel (@Param("statusHttp") String statusHttp, @Param("securityLevel") String securityLevel);

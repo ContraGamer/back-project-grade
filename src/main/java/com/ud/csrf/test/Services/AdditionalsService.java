@@ -287,12 +287,16 @@ public class AdditionalsService {
         }
     }
 
-    // @Scheduled(cron = "0 * * * * ?")
-    // public void deleteDataRequst() {
-    //     List<Request> listReq = requestRepository.findByOrderByDateStartTimeAsc();
-    //     for (Request request : listReq) {
-    //         System.out.println(request.toString());
-    //     }
-    // }
+    @Scheduled(cron = "0 0 0 * * ?")
+    public void deleteDataRequst() {
+        List<Request> listReq = requestRepository.findByOrderByDateTimeStartDesc();
+        int cont = 0;
+        for (Request request : listReq) {
+            if(cont >= 500){
+                requestRepository.delete(request);
+            }
+            cont++;
+        }
+    }
 
 }

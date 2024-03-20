@@ -14,7 +14,6 @@ import com.ud.csrf.test.Model.FinalUser;
 import com.ud.csrf.test.Model.Permit;
 import com.ud.csrf.test.Model.PermitRole;
 import com.ud.csrf.test.Model.Role;
-import com.ud.csrf.test.Repository.PermitRepository;
 import com.ud.csrf.test.Repository.PermitRoleRepository;
 import com.ud.csrf.test.Repository.RoleRepository;
 

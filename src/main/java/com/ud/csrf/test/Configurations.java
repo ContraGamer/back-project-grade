@@ -1,7 +1,5 @@
 package com.ud.csrf.test;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,10 +13,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer.JwtConfigurer;
-import org.springframework.security.web.csrf.CsrfTokenRepository;
 
-import com.ud.csrf.test.Model.Parameter;
 import com.ud.csrf.test.Repository.ParameterRepository;
 import com.ud.csrf.test.Services.AdditionalsService;
 
