@@ -15,7 +15,6 @@ import com.ud.csrf.test.Services.PermitRoleService;
 import com.ud.csrf.test.DTO.DataRolePermitDTO;
 import com.ud.csrf.test.DTO.RolListDTO;
 import com.ud.csrf.test.Model.Permit;
-import com.ud.csrf.test.Model.PermitRole;
 import com.ud.csrf.test.Model.Role;
 
 @RestController

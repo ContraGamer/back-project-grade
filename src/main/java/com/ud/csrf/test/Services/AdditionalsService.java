@@ -289,10 +289,18 @@ public class AdditionalsService {
 
     @Scheduled(cron = "0 0 0 * * ?")
     public void deleteDataRequst() {
+        int cantTotal = 0;
+        try {
+            String cantTotalS = parameterRepository.findByKeyAndState("cant-request", "A").get().getValue();
+            cantTotal = Integer.parseInt(cantTotalS);
+            System.out.println("Cantidad de registros permitidos por parametros: " + cantTotal);
+        } catch (Exception e) {
+            cantTotal = 500;
+        }
         List<Request> listReq = requestRepository.findByOrderByDateTimeStartDesc();
         int cont = 0;
         for (Request request : listReq) {
-            if(cont >= 500){
+            if(cont >= cantTotal){
                 requestRepository.delete(request);
             }
             cont++;
