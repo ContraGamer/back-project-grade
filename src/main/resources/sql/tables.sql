@@ -97,6 +97,19 @@ CREATE TABLE movements(
     PRIMARY KEY (id)
 );
 
+CREATE TABLE request(
+    id BIGSERIAL NOT NULL,
+    origin VARCHAR NOT NULL,
+    destiny VARCHAR NOT NULL,
+    status_http VARCHAR NOT NULL,
+    date_time_start TIMESTAMP DEFAULT now() NOT NULL,
+    date_time_finish TIMESTAMP DEFAULT now() NOT NULL,
+    status_request VARCHAR NOT NULL,
+    security_level VARCHAR NOT NULL,
+    data_request VARCHAR NOT NULL,
+    PRIMARY KEY (id)
+);
+
 
 -- ALTER TABLE parameter ADD COLUMN additional VARCHAR(500);
 -- ALTER TABLE parameter ADD COLUMN of VARCHAR(50);

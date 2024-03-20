@@ -12,13 +12,14 @@ import org.springframework.stereotype.Service;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.ud.csrf.test.DTO.GenericResponseDTO;
 import com.ud.csrf.test.Model.FinalUser;
 import com.ud.csrf.test.Model.Parameter;
+import com.ud.csrf.test.Model.Request;
 import com.ud.csrf.test.Repository.FinalUserRepository;
 import com.ud.csrf.test.Repository.ParameterRepository;
+import com.ud.csrf.test.Repository.RequestRepository;
 
 @Service
 public class AdditionalsService {
@@ -28,6 +29,9 @@ public class AdditionalsService {
 
     @Autowired
     private ParameterRepository parameterRepository;
+
+    @Autowired
+    private RequestRepository requestRepository;
 
     /**
      * Genera un JWT al realizar un inicio de sesion
@@ -272,6 +276,7 @@ public class AdditionalsService {
                             newTokens = newTokens.concat(tokens).concat(",");
                         }
                     }
+                    user.setTokens(newTokens);
                     finalUserRepository.save(user);
                 }
                 System.out.println("Numero de tokens recueperado" + cont);
@@ -281,5 +286,13 @@ public class AdditionalsService {
             }
         }
     }
+
+    // @Scheduled(cron = "0 * * * * ?")
+    // public void deleteDataRequst() {
+    //     List<Request> listReq = requestRepository.findByOrderByDateStartTimeAsc();
+    //     for (Request request : listReq) {
+    //         System.out.println(request.toString());
+    //     }
+    // }
 
 }
