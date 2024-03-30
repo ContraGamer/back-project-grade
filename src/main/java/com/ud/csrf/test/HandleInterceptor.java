@@ -50,6 +50,7 @@ public class HandleInterceptor implements HandlerInterceptor {
         request.setAttribute("info-csrf", "Private - " + (dato ? "authorized": "unauthorized"));  
         if(!dato){
             saveDataRequest(request, response);
+            System.out.println("Entro a guardar el error");
         }
         return dato; // Continúa con el procesamiento de la solicitud
         //return true; // Cuando no funciona el filtro.
