@@ -37,6 +37,7 @@ public class Configurations extends WebSecurityConfigurerAdapter implements WebM
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable(); // deshabilitar CSRF
+        http.cors().disable();
     }
 
     @Override
