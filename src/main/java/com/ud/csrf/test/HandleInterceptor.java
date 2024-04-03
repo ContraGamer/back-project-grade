@@ -87,7 +87,7 @@ public class HandleInterceptor implements HandlerInterceptor {
         while (nombresDeHeaders.hasMoreElements()) {
             String nombreDelHeader = nombresDeHeaders.nextElement();
             String valorDelHeader = request.getHeader(nombreDelHeader);
-            // System.out.println("Header: " + nombreDelHeader + ", Valor: " + valorDelHeader);
+            System.out.println("Header: " + nombreDelHeader + ", Valor: " + valorDelHeader);
             if(nombreDelHeader.equals("origin")){
                 return valorDelHeader;
             }
