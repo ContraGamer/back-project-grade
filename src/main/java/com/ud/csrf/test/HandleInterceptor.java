@@ -36,6 +36,7 @@ public class HandleInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
         System.out.println("------------ Interceptor inicio -------------");
+        getRequestHeaders(request); //Linea para obtener informacion de los headers del request.
         Instant inicio = Instant.now();
         java.sql.Timestamp timestamp = java.sql.Timestamp.from(inicio);
         request.setAttribute("info-start-time", timestamp); 
@@ -80,7 +81,7 @@ public class HandleInterceptor implements HandlerInterceptor {
         }
     }
 
-    private String getOriginRequest(HttpServletRequest request) {
+    private String getRequestHeaders(HttpServletRequest request) {
         Enumeration<String> nombresDeHeaders = request.getHeaderNames();
         
         // Iterar sobre la enumeración para obtener y mostrar los valores de los headers
@@ -88,6 +89,18 @@ public class HandleInterceptor implements HandlerInterceptor {
             String nombreDelHeader = nombresDeHeaders.nextElement();
             String valorDelHeader = request.getHeader(nombreDelHeader);
             System.out.println("Header: " + nombreDelHeader + ", Valor: " + valorDelHeader);
+        }
+        return "";
+    }
+
+    private String getOriginRequest(HttpServletRequest request) {
+        Enumeration<String> nombresDeHeaders = request.getHeaderNames();
+        
+        // Iterar sobre la enumeración para obtener y mostrar los valores de los headers
+        while (nombresDeHeaders.hasMoreElements()) {
+            String nombreDelHeader = nombresDeHeaders.nextElement();
+            String valorDelHeader = request.getHeader(nombreDelHeader);
+            //System.out.println("Header: " + nombreDelHeader + ", Valor: " + valorDelHeader);
             if(nombreDelHeader.equals("origin")){
                 return valorDelHeader;
             }
