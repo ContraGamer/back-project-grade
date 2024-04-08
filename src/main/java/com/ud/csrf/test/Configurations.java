@@ -57,6 +57,7 @@ public class Configurations extends WebSecurityConfigurerAdapter implements WebM
         config.addAllowedOrigin("https://attack-example-project.web.app");
         config.addAllowedOrigin("https://backprojectgrade.web.app/");
         config.addAllowedOrigin("https://backprojectgrade.firebaseapp.com/");
+        config.addAllowedOrigin("https://bank-sim-project.app/");
         // config.addAllowedOrigin("*");
         config.addAllowedHeader("*");
         config.setAllowCredentials(true);
